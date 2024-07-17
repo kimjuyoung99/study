@@ -1,0 +1,30 @@
+.list {
+    border: 5px solid lightgray;
+    width: 500px;
+    margin: 10px auto;
+    position: relative;
+    display: flex;
+}
+
+.list li {
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+.list span {
+    display: block;
+    padding: 1rem;
+}
+
+.list div {
+    background-color: aliceblue;
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    display: none;
+    padding: 2rem;
+}
+
+.list li:first-of-type div {
+    display: block;
+}

@@ -1,0 +1,79 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");   
+:root {
+    --mcolor:yellow;
+    font-size: 16px;
+}    
+.listCon > li {
+        border: 1px solid red;
+    }
+
+    .listCon > li:hover {
+        cursor: pointer;
+    }
+
+    .listCon li {
+        border: 1px solid lightblue;
+    }
+
+    .listCon li:hover {
+        background-color: antiquewhite;
+    }
+
+    .listCon a:active {
+        background-color: rebeccapurple;
+    }
+
+    .listCon a:focus {
+        border-width: 3px;
+    }
+
+    .listCon > li:nth-of-type(6) {
+        background-color: aqua;
+    }
+
+    .listCon > li:nth-of-type(6)::before {
+        content: "여기~!";
+        display: block;
+        border: 1px solid lightseagreen;
+    }
+    .listCon > li:nth-of-type(6)::after {
+        content: "여기~!";
+        display: block;
+        border: 1px solid lightseagreen;
+    }
+    /* .listCon li:nth-of-type(1){
+        border: 5px solid rgb(237, 255, 71);
+    } */
+    /* 띄어쓰기? 자손선택자!  */
+    /* .listCon li:nth-of-type(3){
+        border: 5px solid tomato;
+    } */
+
+    /* 똑같은 css가 있으면 아래 있는게 우선순위 높음 */
+    /* li{
+        background-color: blue;
+    }
+    li{
+        background-color: greenyellow;
+    }
+
+    .listCon.con {}
+    #testCon.con {
+
+    }
+
+    * {
+        margin:0;
+        box-sizing: border-box;
+    }
+
+    .listCon > li {} */
+
+    /* '+' 인접형태 선택자! 바로 아래 하나만 적용 */
+    /* .listCon li:nth-of-type(3) + li {
+        border:10px dotted lightblue;
+    } */
+    /* '~'  아래부더 쭉 적용!*/
+    /* .listCon li:nth-of-type(3) ~ li {
+        border:10px dotted lightblue;
+    } */

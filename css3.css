@@ -1,0 +1,81 @@
+main {
+    border: 5px soild lightgray;
+    max-width: 1200px;
+    width: calc(100% - 4rem);
+    margin: auto;
+}
+main > * {
+    border: 1px solid red;
+}
+
+.banner {
+    width:calc(100% / 3);
+    background-color: palevioletred;
+    border-radius: 1rem;
+    padding: 1rem;
+    position: relative;
+    /* border-radius: 1rem / 2rem;
+    top : 50px;
+    left : 50px; */
+}
+
+.banner h3 {
+    line-height: 2;
+    font-weight:bold;
+    color: white;
+}
+
+.banner a {
+    color: transparent;
+    /* background-color: rgb(0,0,0,0.5); */
+    width: 100%;
+    position:absolute;
+    /* 부모가 뭐라도 있으면 그걸 기준으로 한다   */
+    /* height : 100%; */
+    /* 부모를 기준으로 얼마나 떨어져 있느냐(아래4개) */
+    top : 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index:9999;
+}
+.banner::before,
+.banner::after{
+    position: absolute;
+}
+.banner::before{
+    content: "\f061";
+    bottom:1rem;
+    left:1rem;
+    font-family: "Font Awesome 6 Free";
+    font-weight:900;
+    color: white;
+    transition:0.3s;
+}
+.banner:hover::before {
+    left: 2rem;
+}
+.banner::after{
+    content:"";
+    right: 0;
+    top: 50%;
+    transform:translate(0%,-50%);
+    width:30%;
+    height: 80%;
+    background-image: url('944F1438-D7C2-4982-9584-5504FDE4CFFD.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* 모바일 버전 */
+@media (max-width:1000px){
+    .banner {
+        width: calc(100% / 2);
+    }
+}
+@media (max-width:8000px){
+    .banner {
+        width: 100%;
+    }
+}

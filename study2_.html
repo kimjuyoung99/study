@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <ul class="listCon">
-        <li><span>연습1</span></li>
-        <li><span>연습2</span></li>
-        <li><span>연습3</span></li>
-        <li><span>연습4</span></li>
+    <!-- cdnjs 사이트에서 reset 코드 붙힘 -->
+    <!-- CDN 방식으로 링크한건 위에, 내가 만든 css 링크는 아래에 놓는게 우선순위에 좋다! -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+      integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css2.css" />
+    <!-- <style>
+      .listCon li:nth-of-type(2) {
+        border: 1px solid blue;
+      }
+    </style> -->
+  </head>
+  <body>
+    <ul class="listCon con" id="testCon">
+    <!-- css파일로 적용시키는게 아니라, 인라인으로 직빵으로 적용시키는데 우선순위가 더 높기 때문에,
+    여기 인라인으로 하면 고정된다.
+    important를 사용하여 1순위로 고정될 수 있다! -->
+      <li style="border: 1px solid red"><span>연습1</span></li>
+      <li><span>연습2</span></li>
+      <li><span>연습3</span></li>
+      <li><span>연습4</span></li>
+      <li>연습5</li>
+      <li>연습6</li>
+      <li>연습7</li>
     </ul>
-</body>
+  </body>
 </html>
