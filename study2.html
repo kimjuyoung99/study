@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div>
+            <!-- 로고가 가장 위에 첫번째로 있으니 h1이 좋다. 다른 제목은 h2부터 가고 -->
+            <h1><a href="#">로고</a></h1>
+            <nav class="gnb">
+             <ul>
+                <li>
+                    <a href="#">경기생활문화센터</a>
+                    <ul class="sub">
+                        <li><a href="#">서브메뉴1</a></li>
+                        <li><a href="#">서브메뉴2</a></li>
+                        <li><a href="#">서브메뉴3</a></li>
+                        <li><a href="#">서브메뉴4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">경기도생활문화</a>
+                    <ul class="sub">
+                        <li><a href="#">서브메뉴1</a></li>
+                        <li><a href="#">서브메뉴2</a></li>
+                        <li><a href="#">서브메뉴3</a></li>
+                        <li><a href="#">서브메뉴4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">기록자료</a>
+                    <ul class="sub">
+                        <li><a href="#">서브메뉴1</a></li>
+                        <li><a href="#">서브메뉴2</a></li>
+                        <li><a href="#">서브메뉴3</a></li>
+                        <li><a href="#">서브메뉴4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">웹진</a>
+                    <ul class="sub">
+                        <li><a href="#">서브메뉴1</a></li>
+                        <li><a href="#">서브메뉴2</a></li>
+                        <li><a href="#">서브메뉴3</a></li>
+                        <li><a href="#">서브메뉴4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">소통</a>
+                    <ul class="sub">
+                        <li><a href="#">서브메뉴1</a></li>
+                        <li><a href="#">서브메뉴2</a></li>
+                        <li><a href="#">서브메뉴3</a></li>
+                        <li><a href="#">서브메뉴4</a></li>
+                    </ul>
+                </li>
+             </ul> 
+            </nav>
+<!-- 아래 부분은 depth를 굳이 만들지 않아도 된다! ul, li를 안하고 div 안에 a 태그로만 감싸도 된다 -->
+<!-- 틀린건 아니지만 이게 더 괜찮당 -->
+            <div>
+                <a href="#">로그인</a>
+                <a href="#">검색</a>
+                <a href="#">일정</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <section>
+        <!-- 경기생활문화센터 제목 h2도 좋지만 strong도 괜찮은 듯 함 -->
+        <strong>경기생활문화센터 </br>
+        공간소개</strong>
+        <div>경기생활문화센터에서 운영하는 공간을 둘러보세요</div>
+        <!-- a태그를 버튼처럼 만들 수 있기 때문에 다음과 같이 하는 것도 가독성에 좋다. (button 태그 빼기) -->
+        <ul>
+            <li><a href="#">책 놀이터</a></li>
+            <li><a href="#">생활 수유실</a></li>
+            <li><a href="#">동네부엌</a></li>
+            <li><a href="#">생생 수유실</a></li>
+            <li><a href="#">마주침 공간1</a></li>
+            <li><a href="#">마주침 공간2</a></li>
+            <li><a href="#">한뼘전시</a></li>
+            <li><a href="#">무아지경</a></li>
+            <li><a href="#">생생살롱1</a></li>
+            <li><a href="#">생생살롱2</a></li>
+          </ul>
+        <!-- <ul>
+            <li><button><a href="#">책 놀이터</a></button></li>
+            <li><button><a href="#">생활 수유실</a></button></li>
+            <li><button><a href="#">동네부엌</a></button></li>
+            <li><button><a href="#">생성 수유실</a></button></li>
+            <li><button><a href="#">마주침 공간1</a></button></li>
+            <li><button><a href="#">마주침 공간2</a></button></li>
+            <li><button><a href="#">한뼘전시</a></button></li>
+            <li><button><a href="#">무아지경</a></button></li>
+            <li><button><a href="#">생생살롱1</a></button></li>
+            <li><button><a href="#">생생살롱2</a></button></li>
+         </ul> -->
+         <img src="https://glife.ggcf.kr/inc/imgs/space_01.png" alt=""/>
+        </section>
+
+        <section>
+            <h2>새로운 소식</h2>
+            <ul>
+                <li>
+                    <a href="#">
+                        <span>공지</span>
+                        <p>"또 다른 로컬! 세계 안의 한국" 다니엘 린데만과 함께 하는 토크 콘서트</p>
+                        <span>2023-11-09</span> 
+                        <i class="fa-solid fa-plus"></i>
+                    </a>
+                 </li>
+                 <li>
+                    a 태그로 감싸는 경우가 있는데, 
+                    <a href="#">
+                        <span>공지</span>
+                        <p>2023 경기생활문화축제 '지금, 모두가 지나가는 곳, 생활문화플랫폼'</p>
+                        <span>2023-10-16</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </a>
+                 </li>
+                 <li>
+                    <a href="#">
+                        <span>공지</span>
+                        <p>2023년 활짝학교 사유식탁</p>
+                        <span>2023-09-27</span> 
+                        <i class="fa-solid fa-plus"></i>
+                    </a>
+                 </li> 
+            </ul>
+        </section>
+    </main>
+
+
+    <footer>
+    </footer>
+</body>
+</html>
