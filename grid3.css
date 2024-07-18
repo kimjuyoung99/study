@@ -1,0 +1,35 @@
+.wrap{
+    background-color: lightgray;
+    padding:1rem;
+    display: grid;
+    gap:0.5rem;
+    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+    grid-auto-rows: minmax(100px, 1fr);
+    grid-auto-flow: dense;
+}
+.wrap > div {
+    background-color: lightblue;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+.wrap > div:nth-of-type(2n){
+    background-color: antiquewhite;
+}
+.wrap > div:nth-of-type(3n+1){
+    background-color: tomato;
+}
+.wrap > div:nth-of-type(4n){
+    background-color: green;
+}
+.span2 {
+    grid-row: span 2;
+    grid-column: span 2;
+}
+.span3 {
+    grid-row: span 3;
+    grid-column: span 3;
+}
+.span4 {
+    grid-row: span 2;
+    grid-column: span 4;
+}

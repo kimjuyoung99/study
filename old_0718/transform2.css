@@ -1,0 +1,67 @@
+section {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    gap: 1rem;
+  }
+  section img {
+    width: 50%;
+  }
+  .card {
+    flex: 1;
+    position: relative;
+    padding-top: 40%;
+    /* 3D 공간에서 자식 요소가 어떻게 보일지를 설정하는 데 사용
+    보통 컨테이너 요소에 적용하며, 그 컨테이너의 자식 요소들에 영향 */
+    perspective: 900px;
+  }
+  .card > p {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    border: 1px solid black;
+    /* 3D 변환을 적용했을 때 요소의 뒷면이 보이는지 여부를 제어하는 데 사용 */
+    backface-visibility: hidden;
+    transition: 0.5s;
+  }
+  .front {
+    z-index: 10;
+    background-image: url("./img/line.png");
+    background-color: antiquewhite;
+    filter: grayscale(1);
+  }
+  .back {
+    background-color: rgb(249, 254, 229);
+    transform: rotateY(180deg);
+  }
+  .card:hover .front {
+    filter: grayscale(0);
+    transform: rotateY(-180deg);
+  }
+  .card:hover .back {
+    transform: rotateX(0deg);
+  }
+
+/* ________________________________________ */
+
+  .box {
+    margin: 50px auto;
+    background-color: antiquewhite;
+    width: 50%;
+  }
+  .box .item {
+    width: 50%;
+    /* height: 20vw; */
+    padding-top: 50%;
+    margin: auto;
+    position: relative;
+  }
+  .item p {
+    position: absolute;
+    top: 0;
+  }
+  

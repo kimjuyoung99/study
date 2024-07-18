@@ -1,0 +1,45 @@
+section {
+    border: 3px solid blue;
+    height:100vh;
+}
+.con {
+    border-color: lightblue;
+    border-width: 5px;
+    height: 65vh;
+    position:relative;
+    background-color: rgb(253, 206, 250);
+}
+.con > div {
+    width: 100px;
+    height: 100px;
+    border:2px solid lightgreen;
+}
+.con > div:nth-of-type(1) {
+    background-color: antiquewhite;
+    position:relative;
+    top:50px;
+    left:50px;
+}
+.con > div:nth-of-type(2) {
+    background-color: azure;
+    position:absolute;
+    /* width: auto;
+    height: auto; */
+    top:0;
+    left:100px;
+    right: 0;
+    bottom:0;
+    /* 조상 따라서 가니까 아무도 포지션 가진 애가 없다 */
+}
+.con > div:nth-of-type(3){
+    position: fixed;
+    /* fixed도 z index가 자동으로 주어진다 */
+    background-color: aqua;
+    top : 20%;
+    z-index: 999;
+}
+.con > div:nth-of-type(4){
+    position: sticky;
+    background-color: red;
+    top:0;
+}

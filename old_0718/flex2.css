@@ -1,0 +1,55 @@
+.con {
+    border: 1px solid red;
+    width: 600px;
+    height: 200px;
+    display: flex; /*중요*/
+    /* flex-wrap:wrap; */
+    /* gap:1rem; */
+    flex-direction: row;
+    /* gap:1rem; */
+}
+.item {
+    border:1px solid dodgerblue;
+    border-radius:10px;
+    /* width: calc(100%/3 - 2rem); */
+    flex-grow: 1;
+    /* flex-basis: 0; */
+}
+.item:nth-of-type(1){
+    order: 1;
+}
+.item:nth-of-type(2){
+    flex-grow:2;
+}
+.item:nth-of-type(3){
+    flex-grow: 3;
+}
+
+/* ___________________________ */
+.con2 {
+    border: 1px solid red;
+    width: 80%;
+    margin: auto;
+    height: 200px;
+    display: flex; /*중요*/
+    /* flex-wrap:wrap; */
+    /* gap:1rem; */
+    /* flex-direction: row; */
+    /* gap:1rem; */
+}
+.item2 {
+    border:1px solid dodgerblue;
+    border-radius:10px;
+}
+.con2 > * {
+    border: 1px solid dodgerblue;
+    /* border-radius: 10px; */
+    flex: 1;
+}
+.con2 > div:nth-of-type(2){
+    order: -1;
+}
+.box{
+    border: 1px solid dodgerblue;
+    border-radius: 10px;
+}
