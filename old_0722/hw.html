@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="myreset.css">
+    <link rel="stylesheet" href="hw.css">
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <ul>
+                <div class="logo"><img src="../img2/Logoipsum.png"></div>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Servises</a></li>
+                <li><a href="#">Case studies</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">How it Works</a></li>
+                <li><a href="#">Hire</a></li>
+                <button class="contact_us">contact us</button>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="sec1">
+            <div class="num1">
+                <span class="span1">
+                    <p class="p1">Great <span class="highlight">software</span> is</p>
+                    <p class="p2">built by great <span class="highlight">teams</span></p>
+                </span>
+                <div class="text_button_gap2">
+                    <span class="span2">We help build and manage a team of world-class developers to bring your vision to life</span>
+                    <span class="span3"><button class="start_button">Let’s get started!</button></span>            
+                </div>    
+            </div>
+            <div class="num2"><img src="../img2/hw_computer.png"></div>
+        </section>
+
+        <section class="sec2">
+            <p class="num1">Services we offer</p>
+            <div class="num2">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">Mobile App Development</div>
+                      <div class="swiper-slide">Web Design & Development</div>
+                      <div class="swiper-slide">Software Testing Service</div>
+                      <div class="swiper-slide">Software Testing Service</div>
+                      <div class="swiper-slide">Mobile App Development</div>
+                      <div class="swiper-slide">Web Design & Development</div>
+                      <div class="swiper-slide">Software Testing Service</div>
+                      <div class="swiper-slide">Software Testing Service</div>
+                      <div class="swiper-slide">Mobile App Development</div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                
+                  <!-- Swiper JS -->
+                  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                
+                  <!-- Initialize Swiper -->
+                  <script>
+                    var swiper = new Swiper(".mySwiper", {
+                      slidesPerView: 3,
+                      spaceBetween: 30,
+                      freeMode: true,
+                      pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                      },
+                    });
+                  </script>
+            </div>
+        </section>
+
+
+        <section class="sec3">
+            <div class="num1">
+                <span class="s1">
+                    <p class="p1">Leading companies trust us</p>
+                    <p class="p2">to develop software</p>
+                    <p class="p3">We add development capacity to tech teams. Our value isn’t limited to building teams but is equally distributed across the project lifecycle. We are a custom software development company that guarantees the successful delivery of your project.</p>
+                </span>
+                <span class="s2">
+                    See more Informations ->
+                </span>
+                <span class="s3">
+                    <p class="p1">Meet the People</p>
+                    <p class="p2">We are Working With</p>
+                </span>
+            </div>
+            <div class="num2">
+                <img src="../img2/sec3_img.png">
+            </div>
+        </section>
+
+        <section class="sec4">
+            <div class="image_slide">
+                <img src="../img2/Logo-6.png">
+                <img src="../img2/Logo-7.png">
+                <img src="../img2/Logo-9.png">
+                <img src="../img2/logo3.png">
+                <img src="../img2/logo5.png">
+                <img src="../img2/logo8.png">
+                <img src="../img2/logo9.png">
+            </div>
+        </section>
+    </main>
+
+    <footer class="foot">여기는 가장 아래 입니다.</footer>
+</body>
+</html>
