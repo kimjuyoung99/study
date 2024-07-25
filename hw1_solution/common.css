@@ -1,0 +1,109 @@
+.mw {
+    max-width: 1300px;
+    margin: auto;
+    border: 1px solid lightgreen;
+  }
+  header {
+    border: 1px solid red;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  
+    padding: 0 1rem;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
+    /* z-index: 999; */
+  }
+  header > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 a {
+    display: block;
+    padding: 1rem 0;
+  }
+  header > * {
+    border: 1px solid tomato;
+  }
+  
+  .mainMenu {
+    display: flex;
+  }
+  .mainMenu a {
+    display: block;
+  }
+  .mainMenu > li {
+    position: relative;
+  }
+  .mainMenu > li:hover ul {
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+  }
+  .mainMenu > li > a {
+    border: 2px solid blue;
+    padding: 2rem 1rem;
+  }
+  .mainMenu ul {
+    position: absolute;
+    border: 1px solid rebeccapurple;
+    width: 100%;
+    /* display: none; */
+    visibility: hidden;
+    transition: 0.3s;
+    opacity: 0;
+    padding-top: 1rem;
+  }
+  
+  @media (max-width: 1000px) {
+    header nav {
+      display: none;
+    }
+  }
+  
+  main {
+    padding-top: 100px;
+  }
+  
+  /* sec1 */
+  .banner_sec {
+    padding: 1rem;
+    background-image: url("../hw1_김주영/img2/hw_computer.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+  }
+  .banner_sec .left_box {
+    max-width: 700px;
+    width: 70%;
+    border: 1px saddlebrown solid;
+    padding:100px 0;
+    display:flex;
+    flex-direction:column; /* 컨테이너에서 쓸 수 있는 속성. 원래 row 였다 */
+    gap:2rem;
+  }
+  .banner_sec .left_box > * {
+    border: 1px solid red;
+  }
+  .banner_sec .left_box p {
+    padding-bottom: 2rem;
+  }
+  @media (max-width: 1000px) {
+    .banner_sec {
+      background-size: 60%;
+      background-position: 130% 50%;
+    }
+    .banner_sec .left_box {
+      display:block;
+      width : 100%;
+      padding-top:2rem;
+      padding-bottom:50%;
+    }
+    .banner_sec .left_box h2{
+      font-size: 9vw;/* 비율 유지! */
+      padding-bottom: 2rem;
+    }
+    .banner_sec .left_box h2{
+      background-position: center bottom;
+      background-size: 100%;
+    }
+  }

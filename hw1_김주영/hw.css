@@ -1,18 +1,31 @@
 /* ---------------main : sec4-------------- */
 .sec4 {
-    width: 1441px;
+    width: 100%;
     height: 202px;
     flex-shrink: 0;
     background: #F7F7FA;
+    overflow: hidden;
+    position: relative;
 }
 .image_slide {
     display: flex;
-    padding-top: 5%;
+    margin-top: 5%;
+    animation: scroll 20s linear infinite;
 }
-.image_slide img{
+.image_slide img {
     width: 215px;
     height: 80px;
+    margin-right: 20px;
 }
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 
 /* ---------------main : sec3-------------- */
 .sec3 {
@@ -68,8 +81,6 @@
 
 .sec3 .num1 .s3 .p1 {
     color: var(--Gray-gray-900, #1A202C);
-
-    /* Headings/light-h2 */
     font-family: Inter;
     font-size: 35px;
     font-style: normal;
@@ -91,7 +102,6 @@
 .sec3 .num2 {
     justify-content: center;
     align-items: center;
-    background-color: #9b3585;
     display: flex;
     width: 950px;
     height: 561px;
@@ -164,6 +174,8 @@ main .sec2 {
     width: 100%;
     height: 100%;
     background-color: #F9F9FF;
+    overflow: visible; 
+
 }
 
 .swiper-slide {
@@ -173,6 +185,12 @@ main .sec2 {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease; 
+}
+
+.swiper-slide:hover {
+    transform: translateY(20px); 
+    border: 2px solid #57007B; 
 }
 
 .swiper-slide img {
@@ -180,6 +198,7 @@ main .sec2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    overflow: visible;
 }
 
 
@@ -213,7 +232,6 @@ main .sec1 {
 
 .num1 .p1 {
     color: var(--Gray-gray-900, #1A202C);
-    /* Headings/Lite-h1 */
     font-family: Inter;
     font-size: 45px;
     font-style: normal;
@@ -221,20 +239,17 @@ main .sec1 {
     line-height: 71px;
     /* 157.778% */
     margin-bottom: -20px;
-    /* 더 줄인 아래쪽 여백 */
     margin-top: 50px;
 }
 
 .num1 .p2 {
     color: var(--Gray-gray-900, #1A202C);
-    /* Display/Display/Dilplay-h1-bold */
     font-family: Inter;
     font-size: 53px;
     font-style: normal;
     font-weight: 800;
     line-height: 71px;
     margin-top: 0;
-    /* 위쪽 여백을 없앰 */
     padding-bottom: 10px;
 }
 
@@ -260,14 +275,12 @@ main .sec1 {
     border-radius: 5px;
     background: var(--Brand-Primary-bg, #57007B);
     color: var(--Gray-gray-50, #FAFAFA);
-    /* Button-text/btn-lg */
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: 14px;
     /* 100% */
-    /* Btn-Shadow */
     box-shadow: 0px 4px 49px 0px rgba(0, 0, 0, 0.15);
     border: none;
 }
@@ -292,7 +305,6 @@ header {
     justify-content: space-between;
     align-items: center;
     background: var(--Base-White, #FFF);
-    /* Shadow/Nav-shadown */
     box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.10);
 }
 
@@ -341,7 +353,6 @@ header .contact_us {
     background: var(--Gradient-Primary-bg, linear-gradient(225deg, #F76680 0%, #57007B 100%));
     margin-left: 470px;
     border: none;
-    /* Button-text/btn-lg */
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
