@@ -16,4 +16,4 @@ console.log();
 
 const long = "안녕 반갑습니다. 오늘도 화이팅";
 console.log(long.split("."));
-
+//
