@@ -84,23 +84,3 @@ const banana = new Fruite('바나나','찐노랑');
 console.log(orange); // Fruite { name: '오렌지', color: '노랑', display: [Function (anonymous)] }
 console.log(banana); // Fruite { name: '바나나', color: '찐노랑', display: [Function (anonymous)] }
 
-//생성자 함수를 만들었던 것을 class로 바꿔보기
-//객체지향 프로그래밍이란 것은 '템플릿'을 만드는 것.
-//class는 객체를 만들기 위한 템플릿으로 많이 쓰이고 있다.
-
-//class 로 그대로 만들어 보기
-class Fruite2{
-    constructor(name, color){
-        this.name;
-        this.color;
-    }
-    //위의 constructor에 display를 넣을 수는 있다. this.display로
-    //근데 그러면 고정값이 되게 된다!(물론, 안되는건 아니다.)
-    //그래서 보통 바깥에 적는다.
-    display = () => {
-        console.log(`${this.name}`, `${this.color}`);
-    };
-}
-//새로운 생성자를 만들었으니, 접근해보자
-const apple3 = new Fruite2('사과','빨강');
-console.log(apple3); // Fruite2 { name: '사과', color: '빨강', display: [Function: display] }
