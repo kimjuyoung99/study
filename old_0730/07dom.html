@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        main {
+            height: 400vh;
+            padding:100px;
+        }
+        .sec {
+            width: 50%;
+            height: 300px;
+            background-color: antiquewhite;
+            overflow: auto;
+        }
+        .inner {
+            border: 1px solid red;
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <section class="sec">
+            <p>섹션의 영역</p>
+            <div class="inner">내부영역</div>
+        </section>
+    </main>
+
+    <script>
+        //무조건 큰따옴표로 해야 하는듯!
+        const $sec = document.querySelector(".sec");
+        window.addEventListener("scroll",(e)=> {
+            console.log("스크롤 이벤트");
+            // console.log(window.scrollX);
+            // console.log(window.scrollY);
+        });
+        $sec.addEventListener("scroll",(e)=>{
+            console.log("inner영역에서 스크롤");
+            console.log(e.target.scrollTop);
+            // if(e.target.scrollTop > 100){
+            //     e.target.style.backgroundColor = "#999";
+            //     //카멜!
+            // }  else {
+            //     e.target.style.backgroundColor = "antiquewhite";
+            // }
+            e.target.scrollTop > 200 //
+                ? (e.target.style.backgroundColor = "#999") 
+                : (e.target.style.backgroundColor = "antiquewhite");
+        });
+
+
+    </script>
+
+</body>
+</html>

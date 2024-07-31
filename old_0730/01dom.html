@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    
+    <main>
+        <ul>
+            <li><a href="#red">red으로 이동</a></li>
+        </ul>
+        <div>
+            <button class="locationBtn">페이지 이동</button>
+            <button class="reloadBtn">페이지 리로드</button>
+            <button class="historyBackBtn">앞/뒤로가기</button>
+            <button class="openWindowBtn">새창열기</button>
+            <!-- <button class="openWindowBtn">alert</button>
+            <button class="openWindowBtn">confirm</button>
+            <button class="openWindowBtn">prompt</button> -->
+        </div>
+        <section id="blue" style="height:100vh; border: 1px solid blue;">
+            냉무 1 blue 영역
+            <p>내용이 입력 될 곳</p>
+        </section>
+        <section id="red" style="height:100vh; border: 1px solid red;"><a href="#red">냉무 2 red 영역</a></section>
+    </main>
+
+    <script>
+        // const $locationBtn = document
+        document.querySelector('.locationBtn').addEventListener('click',()=>{
+            location.href = "https://www.naver.com";
+        });
+        //화면 새로고침 되는 부분은 최대한 최후에 써야겠죠?
+        console.log(location.href);
+        document.querySelector('.reloadBtn').addEventListener('click',()=>{
+            location.reload();
+            //location.reload(true); : true = 강제 새로고침(브라우져 캐시무시)
+            //reload 내장 라이브러리가 있으나, 무분별하게 사용하면 안된다.
+        });
+        //주소만 바꿔서 라우터만 잘 정리하면 되는거죠! 
+        document.querySelector('.historyBackBtn').addEventListener('click',()=>{
+            // history.back();//한 단계 뒤로가기
+            // history.forward();//한 단계 앞으로 가기
+            history.go(-2);//넘어가기
+            //여기 가지고 놀아 보면서 해보기
+        });
+        // location.hash = "top";
+        const hashtext = location.hash;
+        console.log(hashtext);
+
+        window.addEventListener('hashcange',handlehash);//해시 체인지 감지 가능
+        function handlehash(){
+            const hashtest2 = location.hesh;
+            document.querySelector("#blue > p").innerHTML=`앵커 이름 ${hashtest2}`
+        }
+
+        document.querySelector('.openWindowBtn').addEventListener('click', ()=>{
+            window.open('https://www.google.com','_blank');
+            //_self : 새창으로 자동으로 감
+        })
+
+    </script>
+
+</body>
+</html>

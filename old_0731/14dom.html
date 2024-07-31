@@ -1,0 +1,92 @@
+<!-- 최종코드임 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-image: url(../img/clear.jpg);
+        background-size: 10%;
+      }
+      /* .modal.on {
+        display: block;
+      } */
+      .modal {
+        display: block;
+        background-color: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        backdrop-filter: blur(2px);
+      }
+      .modal .inner {
+        width: 60%;
+        padding: 100px;
+        border: 1px solid red;
+        margin: 100px auto 0 auto;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 1rem;
+      }
+      .modal .closeBtn {
+        position: absolute;
+        right: calc(20% + 10px);
+        margin-top: 1rem;
+      }
+      .openBtn {
+        position: relative;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="openBtn">모달오픈</button>
+
+    <script>
+      const $openBtn = document.querySelector(".openBtn");
+
+      const displayModal = () => {
+        const $modal = document.createElement("section");
+        $modal.classList.add("modal");
+
+        const $inner = document.createElement("div");
+        $inner.classList.add("inner");
+        $inner.innerHTML = `
+            내용
+            <button class="closeBtn">닫기</button>
+          
+        `;
+
+        $modal.appendChild($inner);
+        document.body.appendChild($modal);
+
+        const $closeBtn = document.querySelector(".closeBtn");
+        $closeBtn.addEventListener("click", () => {
+          //   document.body.removeChild($modal);
+          $modal.remove();
+        });
+      };
+
+      $openBtn.addEventListener("click", displayModal);
+    </script>
+
+    <!-- <script>
+      const $openBtn = document.querySelector(".openBtn");
+      const $closeBtn = document.querySelector(".closeBtn");
+      const $modal = document.querySelector(".modal");
+      $openBtn.addEventListener("click", () => {
+        $modal.classList.toggle("on");
+      });
+      $closeBtn.addEventListener("click", () => {
+        $modal.classList.remove("on");
+      });
+    </script> -->
+  </body>
+</html>

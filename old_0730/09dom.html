@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+    <main>
+        <p>넓이 <strong class="winW"></strong></p>
+        <p>높이 <strong class="winH"></strong></p>
+    </main>
+
+    <script>
+        const $winW = document.querySelector(".winW");
+        const $winH = document.querySelector(".winH");
+
+        const onResize = ()=>{
+            $winW.innerHTML =  `${window.innerWidth}`
+            $winH.innerHTML =  `${window.innerHeight}`
+        };
+
+        let resizeTimer;
+
+        window.addEventListener("resize",()=> {
+            console.log("사이즈 변경중...");
+
+            if(resizeTimer !== null){
+                clearTimeout(resizeTimer);
+            }
+
+            resizeTimer = setTimeout(()=>{
+                onResize()
+            },500);
+
+            onResize();
+
+        });
+    </script>
+    
+</body>
+</html>

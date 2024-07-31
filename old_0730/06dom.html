@@ -1,0 +1,66 @@
+<!-- 완료 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .sec { 
+            height:80vh;
+            border:1px solid red;
+        }
+        .sun {
+            border:1px solid blue;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-image: url("../img/clear.jpg");
+            background-size: contain;
+            /* left: 200px;
+            top:200px; */
+            /* transform: translate(200px, 200px); */
+        }
+    </style>
+</head>
+<body>
+    <div class="sun"></div>
+    <section class="sec"> test</section>
+    <section class="sec targetArea"> test</section>
+    <section class="sec">test</section>
+
+    <script>
+        // clientX, clientY - 브라우저 화면에서 마우스 포인트 좌표
+        // offsetX, offsetY - 이벤트 대상 요소에서 거리
+        // pageX, pageY - 문서 전체
+        // screenX, screenY - 스크린
+        const $sun = document.querySelector(".sun");
+        const $targetArea = document.querySelector(".targetArea");
+
+        $sun.addEventListener("mousedown", ()=> {
+            console.log("마우스 눌렀다");
+            $sun.addEventListener("mousemove", onMouseMove);      
+            $sun.addEventListener("mouseup",()=>{
+                $sun.removeEventListener('mousemove',onMouseMove);
+            })  
+        });
+
+        function onMouseMove(e){
+            $sun.style.cssText =  `
+            transform: translate(${e.pageX - 55}px, ${e.pageY - 55}px);
+            `;
+        }
+
+        // document.addEventListener("mousemove",(e)=>{
+        //     // console.log("마우스 이벤트", e);
+        //     // console.log(e.pageX, e.pageY);
+        //     $sun.style.cssText = `
+        //     transform: translate(${e.pageX - 50}px , ${e.pageY - 50}px);
+        //     `;
+        // });
+        // $targetArea.addEventListener("mousemove",()=> {
+        //     console.log("마우스 움직임");
+        // });
+    </script>
+</body>
+</html>

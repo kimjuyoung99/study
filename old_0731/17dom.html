@@ -1,0 +1,47 @@
+<!-- 완료 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .img{
+            width: 100px;
+            font-size: "2rem";
+        }
+        .link1 {
+            color:tomato;
+        }
+    </style>
+</head>
+<body>
+
+    <a class="link1" href="https://www.naver.com" target = "_blank"></a>
+    <img class="img" src = "../img/cloudy.jpg" alt="구름" width="100px"/>
+
+    <script>
+        const link1 = document.querySelector(".link1");
+        const img1 = document.querySelector(".img");
+        // img1.style.width = '200px'
+        console.log(link1.getAttribute("href"));//https://www.naver.com
+        console.log(link1.getAttribute("target"));//_blank
+        console.log(link1.attributes);
+        console.log(link1.attributes[0]);
+        console.log(link1.hasAttribute("id"));//false
+
+        console.log(getComputedStyle(link1).color);//rgb(255, 99, 71)
+        console.log(getComputedStyle(link1).backgroundColor);//rgba(0, 0, 0, 0)
+        console.log(img1.getBoundingClientRect());
+
+        setTimeout(()=>{
+            img1.setAttribute("src","../img/clear.jpg");
+            img1.setAttribute("alt","햇님");
+            // img1.style.width = '200px';
+            img1.style.cssText = `width: 200px; border:1px solid red`
+            // img1.style.fontSize = '200px'
+        },1000);
+    </script>
+
+</body>
+</html>

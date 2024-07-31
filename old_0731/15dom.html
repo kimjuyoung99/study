@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <section id="current">
+        <div>아이템1</div>
+        <div class="item2">
+            <p>아이템2</p>
+        </div>
+        <div>아이템3</div>
+    </section>
+
+    <section class="box">
+        요소 추가 될 곳
+    </section>
+
+    <script>
+        const cloneItem = document.querySelector(".item2").cloneNode(true);//true쓰냐 안쓰냐 여부
+        console.log(cloneItem);
+
+        document.querySelector(".box").appendChild(cloneItem);
+    </script>
+    
+</body>
+</html>

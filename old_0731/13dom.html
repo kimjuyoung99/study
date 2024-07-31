@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .dark {
+          background-color: black;
+          color: white;
+        }
+      
+        #current {
+          border: 1px solid red;
+        }
+      
+        #current > div {
+          border: 5px solid lightblue;
+        }
+      </style>
+      
+      <div class="addItem">추가할 요소</div>
+      
+      <section>이전요소</section>
+      <section id="current">
+        <!-- 주석 -->
+        <div>아이템1</div>
+        <div id="child1">아이템2</div>
+        <div>아이템3</div>
+      </section>
+      <section>다음요소</section>
+      
+      <script>
+        const $current = document.getElementById("current");
+        const $child1 = document.getElementById("child1");
+        const newBox = '<div class="new box">새롭게 추가할 요소</div>';
+        const newBox2 = '<div class="new box2">새롭게 추가할 요소</div>';
+
+        setTimeout(()=>{
+            $current.insertAdjacentHTML("beforebegin",newBox);
+        },1000);
+        setTimeout(()=>{
+            $current.insertAdjacentHTML("afterend",newBox);
+        },2000);
+        setTimeout(()=>{
+            $current.insertAdjacentHTML("afterend",newBox2);
+        },3000);
+        setTimeout(()=>{
+            $current.insertAdjacentHTML("beforebegin",newBox2);
+        },4000);
+
+        setTimeout(()=>{
+            $current.removeChild($child1);
+            $current.remove();
+        },4000);
+
+      </script>
+      
+   
+    
+</body>
+</html>

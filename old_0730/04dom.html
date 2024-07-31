@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <button class="eventBtn">이벤트 발생</button>
+    <button class="eventRemoveBtn">이벤트 제거</button>
+    <script>
+        const eventBtn = document.querySelector('.eventBtn');
+        const onClickButton = (e) => {
+            console.log('이벤트 발생', e);
+        }
+
+        const option = {
+            // capture: true, // 이벤트 캡쳐링 여부(기본값 false)
+            once: true, // 이벤트 한번만 실행
+            // passive : true // e.preventDefalut()
+        }
+        eventBtn.addEventListener('click', onClickButton, option);
+        
+        setTimeout( ()=>{
+            eventRemoveBtn.removeEventListener('click', );
+        }, 3000);
+        //다짜고짜 전역에서 불러낼 수 있다!
+    </script>
+</body>
+</html>

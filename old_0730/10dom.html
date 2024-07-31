@@ -1,0 +1,62 @@
+<!-- 마우스 휠 작동 멈추게 하기 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .con{
+            border: 1px solid red;
+            height: 150px;
+            overflow: scroll;
+        }
+        #test1 {
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+            cursor: pointer;
+        }
+        .test1Label {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>마우스 휠 이벤트 멈춤</h1>
+
+    <input type="checkbox" name="test1" id="test1"/> 
+    <label for="test1" class="test1Label">체크하면 스크롤 멈춤</label>
+    <ul class="con">
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <li>리스트1</li>
+        <!-- 여기 뭐얌... -->
+    </ul>
+
+    <script>
+        let isCheck=true; 
+        document.querySelector("#test1").addEventListener("click",(e)=>{
+            console.log(e.target.checked);
+            isCheck = e.target.checked === false;
+            console.log("isCheck",isCheck);
+        });
+        document.querySelector(".con").addEventListener("wheel",(e)=>{
+            console.log(e);
+            if(isCheck==true){
+                return;
+            }
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>

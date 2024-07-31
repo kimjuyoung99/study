@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+    <section id="current">
+        <div>아이템1</div>
+        <div class="item2">아이템2</div>
+        <div>아이템3</div>
+    </section>
+    
+
+    <script>
+        const $current = document.querySelector("#current");
+        const $item1 = document.querySelector(".item1");
+        const $item2 = document.querySelector(".item2");
+        const newData = document.createElement("p");
+        newData.textContent = "<div> 새로운 p 요소 </div>";
+        newData.classList.add("box");
+
+        // $current.replaceChild(newData,$item2);
+        $item2.replaceWith(newData);//윗줄과 방법이 같음
+
+        $item1.outerHTML = `<div> div 요소 </div>`;
+    </script> 
+
+
+</body>
+</html>

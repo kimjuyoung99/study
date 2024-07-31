@@ -1,0 +1,75 @@
+<!-- 드래그 이벤트 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        main {
+            border:1px solid red;
+            padding : 50px;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .sun {
+            width: 50px;
+            height: 50px;
+            background: url("../img/clear.jpg");
+            background-size: contain;
+            /* border : 3px solid red; */
+        }
+        .con {
+            border:1px solid lightblue;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <div class="sun" draggable="true"></div>
+        <div class="con"></div>
+    </main>
+
+    <script>
+        const $sun = document.querySelector(".sun");
+        const $con = document.querySelector(".con");
+
+        $sun.addEventListener("dragstart", (e)=> {
+            console.log("dragstart 시작",e);
+            console.log("dataTransfer ---", e.dataTransfer);
+        });
+
+        $sun.addEventListener("dragstart", (e)=> {
+            console.log("dragstart 시작",e);
+            console.log("dataTransfer ---", e.dataTransfer);
+        });
+
+        $sun.addEventListener("drop",(e)=>{
+            console.log(e);
+        })
+ 
+        // $sun.addEventListener("dargstart", ()=> {
+        //     console.log("dragstart 시작");
+        // });
+        // $sun.addEventListener("drag", ()=> {
+        //     console.log("drag....");
+        // });
+        // $sun.addEventListener("dragend", ()=> {
+        //     console.log("dragend 끝");
+        // });
+        // $con.addEventListener("dragenter", ()=> {
+        //     console.log("dragenter 진입");
+        // });
+        // $con.addEventListener("dragover", ()=> {
+        //     console.log("dragover 영역위에 존재");
+        // });
+        // $con.addEventListener("dragleave", ()=> {
+        //     console.log("dragleave 영역에서 빠져나감");
+        // });
+    </script>
+
+</body>
+</html>

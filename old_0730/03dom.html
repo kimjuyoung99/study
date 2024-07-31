@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .con {
+            width: 50%;
+            height: 250px;
+            background-color: aliceblue;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 class = "textH1"></h1>
+
+    <div class="con">
+        <button class="fullBtn">전체 화면으로</button>
+        <button class="exitBtn">전체 화면 해제</button>
+        <div>컨텐츠가 있어요</div>
+        <div>컨텐츠가 있어요</div>
+        <div>컨텐츠가 있어요</div>
+    </div>
+    <script>
+        if(navigator.onLine){
+            console.log("연결상태");
+        }
+        window.addEventListener('online',()=>{
+            console.log("온라인");
+        });
+        window.addEventListener('offline',()=>{
+            console.log("오프라인");
+        });
+        document.querySelector('.fullBtn').addEventListener('click',()=>{
+            document.querySelector('.con').requestFullscreen();
+        });
+        document.querySelector('.exitBtn').addEventListener('click',()=>{
+            document.querySelector('.con').exitFullscreen();
+        });
+
+        
+        window.addEventListener("focus", (e) => {
+            console.log(e);
+            document.querySelector(".textH1").innerHTML = `포커스 상태`;
+        });
+        window.addEventListener("blur", ()=> {
+            document.querySelector(".textH1").innerHTML = `포커스를 벗어난 상태`;
+        });
+        
+        // document.hasFocus();
+
+    </script>
+
+</body>
+</html>

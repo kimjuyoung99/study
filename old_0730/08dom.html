@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .text {
+            background-color: aliceblue;
+            font-size: 2rem;
+            outline:none;
+            border:none;
+            padding: 1rem;
+            width:80%;
+            height:300px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <textarea class="text" placeholder="내용을 입력하셈"></textarea>
+        <p>글자수</p>
+    </main>
+    <script>
+        const $text = document.querySelector('.text');
+        // $text.addEventListener("keydown", (e)=>{
+        //     // console.log("키를 눌렀다", e);
+        // });
+
+        // $text.addEventListener("keypress", (e)=>{
+        //     // console.log("문자가 입력됬음", e);
+        // });
+
+        $text.addEventListener("keyup",(e)=> {
+            // console.log("키 눌림이 해제됬음", e);
+            // console.log(e.key);//d
+            // console.log(e.code);//KeyD
+            // console.log(e.keyCode);//68
+            const inputText = $text.value;
+            document.querySelector("main>p").innerHTML = inputText.length;
+        });
+
+    </script>
+
+</body>
+</html>

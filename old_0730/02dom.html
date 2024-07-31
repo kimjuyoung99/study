@@ -1,0 +1,70 @@
+<!-- 완료 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      main {
+        border: 1px solid red;
+        height: 300vh;
+        width: 300vw;
+        background: rgb(34, 193, 195);
+        background: linear-gradient(
+          45deg,
+          rgba(34, 193, 195, 1) 0%,
+          rgba(114, 125, 190, 1) 38%,
+          rgba(253, 195, 45, 1) 77%,
+          rgba(253, 48, 45, 1) 100%
+        );
+      }
+      .scrollInfo {
+        font-weight: bold;
+        font-size: 2rem;
+        position: fixed;
+        left: 10%;
+        color: white;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="valueW">넓이</p>
+      <p class="valueH">높이</p>
+      <p class="ppi">해상도</p>
+      <p class="scrollInfo">스크롤 정보</p>
+    </main>
+    <script>
+      function resizeHandler() {
+        const w = innerWidth;
+        const h = innerHeight;
+        const PPI = window.devicePixelRatio;
+
+        document.querySelector(
+          ".valueW"
+        ).innerHTML = `윈도우의 가로는 ${w}px 입니다.`;
+        document.querySelector(
+          ".valueH"
+        ).innerHTML = `윈도우의 세로는 ${h}px 입니다.`;
+        document.querySelector(
+          ".ppi"
+        ).innerHTML = `해상도의 비율은 ${PPI} 입니다.`;
+      }
+      window.addEventListener("resize", resizeHandler);
+      resizeHandler();
+
+      document.addEventListener("scroll", (e) => {
+        const x = window.scrollX;
+        const y = window.scrollY;
+        console.log(e);
+        document.querySelector(
+          ".scrollInfo"
+        ).innerHTML = `X : ${x}px, Y : ${y}px`;
+      });
+
+      document.title = "연습";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!-- 완료 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        section {
+            border: 1px solid red;
+        }
+        .log {
+            width: 200px;
+            height: 200px;
+            background-color: aliceblue;
+            margin : 50px auto;
+        }
+        .log2 {
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="log">마우스 이벤트 영역</div>
+    </section>
+
+    <section class="box">
+        <div class="log log2">마우스 이벤트 영역 2</div>
+    </section>
+
+    <script>
+        const eventArea = document.querySelector('.log');
+        const eventArea2 = document.querySelector('.log2');
+        const box = document.querySelector('.box');
+        box.addEventListener("mouseover",()=>{
+            console.log("box - mouseover");
+        });
+        eventArea2.addEventListener("mouseover",(e)=>{
+            console.log("eventArea2 - mouseover");
+            e.stopPropagation();
+        });//stopPropagation : 버블링 되는 것을 방지한다(차이점 설명했음)
+
+
+        eventArea.addEventListener("mousedown", ()=>{
+            console.log("mouseDown - 마우스 버튼을 누르고있다.");
+        });
+        eventArea.addEventListener("mouseup", ()=>{
+            console.log("mouseUp - 마우스 버튼에서 손을 뗀 상태");
+        });
+        eventArea.addEventListener("mousemove", ()=>{
+            console.log("mouseMove - 마우스 포인터 이동 중");
+        });
+        eventArea.addEventListener("mouseenter", () => {
+        console.log("mouseenter - 마우스 포인터가 영역 내부에 진입");
+       });
+        eventArea.addEventListener("mouseleave", ()=>{
+            console.log("mouseLeave - 마우스 포인터가 영역 밖으로 빠진 상태");
+        });
+        //여러 이벤트가 동시에 작동한다!
+    </script>
+</body>
+</html>
