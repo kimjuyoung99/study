@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <!-- 간단한 메모 -->
+    <main>
+      <form>
+        <label for="myText">텍스트를 입력하세요</label>
+        <input type="text" name="myText" id="myText" />
+        <button type="submit">입력완료</button>
+      </form>
+      <section>
+        <h2>입력된 리스트</h2>
+        <ul class="textList">
+          <li>- <span class="text">청소</span></li>
+        </ul>
+      </section>
+    </main>
+
+    <script>
+      const $form = document.querySelector("form");
+      const $myText = document.querySelector("#myText");
+      const $textList = document.querySelector(".textList");
+      const Storage_KEY = "saveTexts";
+
+      const addTextList = (text) => {
+        const li = document.createElement("li");
+        li.innerHTML = `- <span class="text">${text}</span>`;
+        $textList.prepend(li);
+      };
+      const saveToLocalStorage = (text) => {
+        let saveTexts = JSON.parse(localStorage.getItem(Storage_KEY)) || [];
+        saveTexts.unshift(text);
+        localStorage.setItem(Storage_KEY, JSON.stringify(saveTexts));
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log($myText.value);
+        const inputText = $myText.value;
+
+        if (inputText.trim() !== "") {
+          addTextList(inputText);
+          $myText.value = "";
+          $myText.foucs;
+          saveToLocalStorage(inputText);
+        } else {
+          console.log("값을 입력해주세요");
+        }
+      };
+
+      $form.addEventListener("submit", handleSubmit);
+
+      window.addEventListener("load", () => {
+        let saveTexts = JSON.parse(localStorage.getItem(Storage_KEY)) || [];
+        saveTexts.forEach((text) => addTextList(text));
+      });
+    </script>
+  </body>
+</html>

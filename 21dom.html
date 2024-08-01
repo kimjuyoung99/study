@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <form id="group">
+            <h1>과일선택</h1>
+            <input type="radio" id="fruit" name="fruit" value="apple" />
+            <label for="fruit">사과</label>
+            <input type="radio" id="orange" name="fruit" value="orange" />
+            <label for="orange">오렌지</label>
+            <input type="radio" id="grape" name="fruit" value="grape" />
+            <label for="grape">포도</label>
+            <!-- name이 같으면 checked가 한개만 체크 됨.. -->
+
+            <h1>음료</h1>
+            <input type="radio" id="coke" name="drink" value="coke" />
+            <label for="coke">콜라</label>
+            <input type="radio" id="tea" name="drink" value="tea" />
+            <label for="tea">티</label>
+        </form>
+
+        <script>
+            const $group = document.querySelector("#group");
+            console.log($group.drink);
+            console.log($group.fruit);
+            const handleChange =(e)=>{
+                console.log(e);
+                const drinkValue = $group.fruit.value;
+                const fruitValue = $group.drink.value;
+                console.log("drinkValue : ", drinkValue,"fruitValue : ",fruitValue);
+                //name 값을 인식한다. node list로 가져온다!
+            };
+            $group.addEventListener("change",handleChange);
+        </script>
+</body>
+</html>

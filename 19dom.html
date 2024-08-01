@@ -1,0 +1,45 @@
+<!-- checkbox 예제 해보기 -->
+<!-- 극후반에 미완! -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    
+    <main>
+        <input type="checkbox" id="cbA" value="a">
+        <label for="cbA">체크 A</label>
+        <input type="checkbox" id="cbB" value="b">
+        <label for="cbB">체크 B</label>
+
+        <p class="log">정보가 출력되는 곳</p>
+    </main>
+
+    <script>
+        const $cbA = document.querySelector("#cbA");
+        const $log = document.querySelector(".log");
+        
+        $log.innerHTML = `체크박스 상태는 ${$cbA.checked}`;
+
+        $cbA.addEventListener("change",(e)=>{
+            console.log(e);
+            console.log(e.target);
+            const value = e.target.checked;
+
+            $log.innerHTML = `체크박스 상태는 {$value} 변경됬음`;
+        });
+
+        // console.log($cbA);
+        // console.log($cbA.value);
+        // console.log($cbA.checked);
+        // $cbA.checked = false;
+        // console.log($cbA.checked);
+
+
+    </script>
+
+</body>
+</html>

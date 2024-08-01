@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <main>
+      <select name="friut" id="friut">
+        <option value="apple">사과</option>
+        <option value="orange" selected>오렌지</option>
+        <option value="grape">포도</option>
+      </select>
+
+      <p class="log">선택된 리스트</p>
+    </main>
+
+    <script>
+        const $friut = document.querySelector("#friut");
+        const value = $friut.value;
+        // document.querySelector(".log").innerHTML = value;
+
+        $friut.addEventListener("change",()=>{
+            const value = $friut.value;
+            document.querySelector(".log").innerHTML = value;
+        });
+
+    </script>
+  </body>
+</html>
