@@ -1,0 +1,62 @@
+<!-- 미완성 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      .rect {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        background-color: antiquewhite;
+        position: absolute;
+        top: 150px;
+        left: calc(50%-50px);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="rect">사각형</div>
+      <div>
+        <input type="checkbox" id="checkbox" />
+        <label for="checkbox">애니메이션 확인</label>
+        <div class="log">시작</div>
+        <div class="log2">진행중</div>
+        <div class="log3">끝</div>
+      </div>
+    </main>
+
+    <script>
+      const $checkbox = document.getElementById("checkbox");
+      const $rect = document.querySelector(".rect");
+      $checkbox.addEventListener("change", (e) => {
+        if (e.target.checked) {
+          $rect.animate(
+            {
+              transform: ["scale(1)", "scale(5)"],
+            },
+            {
+              duration: 1000,
+              essing: "ease",
+              fill: "both",
+            }
+          );
+        } else {
+          $rect.animate(
+            {
+              transform: ["scale(1)", "scale(5)"],
+            },
+            {
+              duration: 1000,
+              essing: "ease",
+              fill: "both",
+            }
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

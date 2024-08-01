@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .rect {
+            width: 100px;
+            height: 100px;
+            border:1px solid red;
+            background-color: antiquewhite;
+            position:absolute;
+            top:150px;
+            left:calc(50%-50px);
+        }
+        .on {
+            /* width: 200px; */
+            animation: rotate 3 1s linear;
+        }
+        @keyframes rotate {
+            0%{
+                transform:rotate(0);
+            }
+            100%{
+                transform:rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="rect">사각형</div>
+        <div>
+            <input type="checkbox" id="checkbox" />
+            <label for="checkbox">애니메이션 확인</label>
+            <div class="log">로그 표시 영역</div>
+        </div>
+    </main>
+
+    <script>
+        const $checkbox = document.getElementById("checkbox");
+        const $rect = document.querySelector(".rect");
+        const $log = document.querySelector(".log");
+        const $log2 = document.querySelector(".log2");
+        const $log3 = document.querySelector(".log3");
+
+        $checkbox.addEventListener("change",()=>{
+            $rect.classList.toggle("on");
+
+            $rect.addEventListener("animationstart",()=>{
+                $log.innerHTML=`animationstart 이벤트 발생 ${new Date().toLocaleString}`
+            });
+            $rect.addEventListener("animationiteratioin",()=>{
+                $log.innerHTML=`animationiteratioin 이벤트 발생 ${new Date().toLocaleString}`
+            });
+            $rect.addEventListener("animationend",()=>{
+                $log.innerHTML=`animationend 이벤트 발생 ${new Date().toLocaleString}`
+            });
+
+        })
+    </script>
+</body>
+</html>

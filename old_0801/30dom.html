@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .point {
+            width: 50px;
+            height:50px;
+            border: 1px solid tomato;
+            border-radius: 50%;
+            position:absolute;
+            animation: rotate infinite 5s linear;
+            will-change: transform;
+        }
+        .point::after {
+            content:"";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: tomato;
+            border-radius: 50%;
+            transform: translate(2px,2px);
+        }
+        @keyframes rotate {
+            0%{
+                transform:rotate(0);
+            }
+            100%{
+                transform:rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="point"></div>
+    <script>
+        const $point = document.querySelector(".point");
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        window.addEventListener("mousemove",(e)=>{
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            console.log(mouseX);
+        });
+        function tick () {
+            requestAnimationFrame(tick);
+
+            currentX += (mouseX - (currentX + 50)) * 0.1;
+            currentY += (mouseY - (currentY + 50)) * 0.1;
+
+            $point.style.left = `${mouseX}px`;
+            $point.style.top = `${mouseY}px`;
+        };
+        tick();
+        // document.body.addEventListener('mousemove',(e)=>{
+        //     console.log(e);
+        // });
+
+    </script>
+</body>
+</html>
