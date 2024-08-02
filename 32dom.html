@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      .top_menu {
+        position: fixed;
+        right: 1rem;
+        top: -200px;
+        display: flex;
+        gap: 1rem;
+        transition: 0.3s;
+      }
+      .top_menu.on {
+        top: 1rem;
+      }
+      .top_menu a {
+        padding: 1rem;
+        text-decoration: none;
+        color: white;
+        background-color: black;
+        transition: 0.3s;
+      }
+      .top_menu a:hover,
+      .top_menu a.on {
+        background-color: tomato;
+        color: black;
+      }
+      .goTop {
+        position: fixed;
+        right: 100px;
+        bottom: 100px;
+        background-color: antiquewhite;
+        padding: 1rem;
+      }
+      .sec_con section {
+        height: 100vh;
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #sec1 {
+        background-color: aliceblue;
+      }
+      #sec2 {
+        background-color: rgb(252, 243, 212);
+      }
+      #sec3 {
+        background-color: rgb(255, 240, 248);
+      }
+      #sec4 {
+        background-color: aliceblue;
+      }
+      #sec5 {
+        background-color: rgb(255, 240, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="top_menu">
+      <a href="#sec1">1번영역</a>
+      <a href="#sec2">2번영역</a>
+      <a href="#sec3">3번영역</a>
+      <a href="#sec4">4번영역</a>
+      <a href="#sec5">5번영역</a>
+    </nav>
+    <a href="#sec1" class="goTop">상단으로</a>
+    <main class="sec_con">
+      <section id="sec1">1번 섹션</section>
+      <section id="sec2">2번 섹션</section>
+      <section id="sec3">3번 섹션</section>
+      <section id="sec4">4번 섹션</section>
+      <section id="sec5">5번 섹션</section>
+    </main>
+
+    <script>
+      /**
+       * 1. 스크롤이 100px 이상 내려왔을 때
+       *      1-1..top_menu에 .on 붙인다
+       *      1-2. 100px 이하일 때는 .on 제거
+       * 2. 스크롤의 위치가 각 섹션의 상단 위치보다 아래에 있으면
+       *      2-1. 해당 섹션의 인덱스를 찾아
+       *      2-2. top_menu >a 중에서 동일 인덱스 요소에 .on 적용
+       * 
+       * 
+       *
+       */
+      const $elm = document.querySelectorAll(".sec_con > section");
+      const $topMenu = document.querySelector(".top_menu");
+      const $navLink = $topMenu.querySelectorAll("a");
+
+      $elm.forEach((item, i, arr) => {
+        item.addEventListener("wheel", (e) => {
+          console.log(" 휠이벤트 발생", e);
+          e.preventDefault();
+          let delta = 0;
+          delta = e.deltaY;
+
+          let moveTop = window.scrollTop;
+          //let elmSection = $elm[i];
+
+          //휠을 내렸을 때
+          if (delta > 0) {
+            if (i !== arr.length - 1) {
+              try {
+                moveTop =
+                  window.scrollY +
+                  item.nextElementSibling.getBoundingClientRect().top;
+              } catch (e) {
+                // console.log(e);
+              }
+            }
+          } else {
+            //휠을 올렸을 때
+            console.log("휠 올림");
+            if (i !== 0) {
+              try {
+                moveTop =
+                  window.scrollY +
+                  item.previousElementSibling.getBoundingClientRect().top;
+              } catch (e) {
+                // console.log(e);
+              }
+            }
+          }
+          window.scrollTo({ top: moveTop, left: 0, behavior: "smooth" });
+        });
+      });
+
+      window.addEventListener("scroll", () => {
+        let scrollTop = window.scrollY;
+        scrollTop > 100
+          ? $topMenu.classList.add("on")
+          : $topMenu.classList.remove("on");
+
+        $elm.forEach((item, idx) => {
+          if (scrollTop > item.offsetTop - 50) {
+            $navLink.forEach((a) => a.classList.remove("on"));
+            $navLink[idx].classList.add("on");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      main {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 2em;
+        line-height: 1.5;
+      }
+      article {
+        padding: 200px 0;
+        width: 80%;
+      }
+      em {
+        color: tomato;
+        font-size: 1.2em;
+      }
+      .over {
+        border-bottom: 1px solid lightcoral;
+      }
+      .over:hover {
+        background-color: aliceblue;
+      }
+
+      .cursor {
+        border: 5px solid lightblue;
+        position: absolute;
+        /* transform: translate(100px, 100px); */
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        user-select: none;
+        pointer-events: none;
+        transform: scale(1);
+        transition: 0.3s;
+        top: 0;
+        left: 0;
+      }
+      .cursor.active {
+        transform: scale(3);
+      }
+      /* .cursor.active {
+        transform: translate(calc(100px - 50%), calc(100px - 50%)) scale(3);
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="cursor"></div>
+    <main>
+      <article>위쪽영역</article>
+      <article>
+        <p>
+          Lorem ipsum dolor sit amet
+          <em class="over">consectetur adipisicing elit</em>. Quaerat
+          <em>reprehenderit</em> placeat corrupti beatae cupiditate quasi
+          architecto quidem amet. <em class="over">Quam</em> blanditiis nihil
+          aliquam dolore alias officiis illo esse fuga, corporis at!
+        </p>
+      </article>
+      <article class="coord">
+        <p>x좌표 : <span></span></p>
+        <p>y좌표 : <span></span></p>
+      </article>
+    </main>
+
+    <script>
+      const $cursor = document.querySelector(".cursor");
+
+      document.addEventListener("mousemove", (e) => {
+        // $cursor.style.cssText = `
+        //    transform: translate(calc(${e.pageX}px - 50%), calc(${e.pageY}px - 50%))
+        // `;
+        $cursor.style.cssText = `left:${e.pageX}px; top:${e.pageY}px`;
+        console.log(e.pageX);
+      });
+
+      const $over = document.querySelectorAll(".over");
+      $over.forEach((em) => {
+        em.addEventListener("mouseenter", (e) => {
+          console.log(" enter실행");
+          $cursor.classList.add("active");
+          //   $cursor.style.cssText = `
+          //    transform: translate(calc(${e.pageX}px - 50%), calc(${e.pageY}px - 50%)) scale(3);
+          // `;
+        });
+        em.addEventListener("mouseleave", (e) => {
+          console.log(" leave실행");
+          $cursor.classList.remove("active");
+          //   $cursor.style.cssText = `
+          //    transform: translate(calc(${e.pageX}px - 50%), calc(${e.pageY}px - 50%)) scale(1);
+          // `;
+        });
+      });
+    </script>
+  </body>
+</html>
