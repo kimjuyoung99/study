@@ -1,3 +1,5 @@
+<!-- 완료 -->
+<!-- 디바운드란? -->
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -89,11 +91,23 @@
        * 1. 스크롤이 100px 이상 내려왔을 때
        *      1-1..top_menu에 .on 붙인다
        *      1-2. 100px 이하일 때는 .on 제거
+       * 
        * 2. 스크롤의 위치가 각 섹션의 상단 위치보다 아래에 있으면
        *      2-1. 해당 섹션의 인덱스를 찾아
        *      2-2. top_menu >a 중에서 동일 인덱스 요소에 .on 적용
        * 
+       * 3. 각 섹션에서 마우스 휠 이벤트가 발생했을 때
+       * 마우스 휠을 위로 굴리면 이전 섹션으로 이동하고
+       * 마우스 휠을 아래로 굴리면 다음 섹션으로 이동합니다.
        * 
+       * 휠 이벤트가 발생하는 섹션을 기준으로
+       * 이전 섹션과 다음섹션을 요소의 상단 위치를 기준으로 계산하고
+       * window.scrollTo() 메서드를 사용하여 스크롤을 이동합니다.
+       * 
+       * 이때 첫번째 섹션에서 위로 스크롤하거나
+       * 마지막 섹션에서 아래로 스크롤하는 경우에는
+       * 이벤트가 발생하지 않도록 예외처리를 합니다.
+       *
        *
        */
       const $elm = document.querySelectorAll(".sec_con > section");
@@ -104,10 +118,8 @@
         item.addEventListener("wheel", (e) => {
           console.log(" 휠이벤트 발생", e);
           e.preventDefault();
-          let delta = 0;
-          delta = e.deltaY;
-
-          let moveTop = window.scrollTop;
+          const delta = e.deltaY;
+          let moveTop = window.scrollY;
           //let elmSection = $elm[i];
 
           //휠을 내렸을 때
@@ -152,5 +164,9 @@
         });
       });
     </script>
+
+    <!-- 제시된 코드의 최적화 및 최신 문법으로 반영해 보세요
+    .top_menu 영역과 .goTop에서 wheel 이벤트가 적용되지 않는 부분을 해결해 보세요 -->
+    
   </body>
 </html>
