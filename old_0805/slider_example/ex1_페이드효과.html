@@ -1,0 +1,98 @@
+<!-- 슬라이더1 : 페이드 효과 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      @charset 'utf-8';
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .slide1 {
+        border: 10px solid tomato;
+        max-width: 600px;
+        width: 60%;
+        margin: auto;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+      }
+      .slider-img {
+        display: flex;
+      }
+      .slide1 .slider {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0;
+      }
+      .slide1 .slider:first-of-type {
+        z-index: 0;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>슬라이드 - 페이드 효과</h1>
+    <section class="slide1">
+      <div class="slide-wrap">
+        <ul class="slider-img">
+          <li class="slider">
+            <img src="https://picsum.photos/400/600" alt="이미지1" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/800/550" alt="이미지2" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/600/600" alt="이미지3" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/400/350" alt="이미지4" />
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <script>
+      // 모든 슬라이드 리스트가 한곳에 위치하며
+      // 투명도와 z-index로 슬라이드의 가시성을 만들어냄
+
+      const $slider = document.querySelectorAll(".slider");
+      let currentIndex = 0; // 시작 index
+      let sliderCount = $slider.length; // 슬라이드 개수
+      let timemer = 3000; // setInterval 에서 사용될 슬라이드 시간 간격
+
+      setInterval(() => {
+        // 현재 슬라이드를 1 증가하지만 전체 슬라이드 수를 넘길 수 없음
+        // 1,2,3,0,1,2,3,0... 순으로 반복
+        let nextIndex = (currentIndex + 1) % sliderCount;
+
+        $slider[currentIndex].style.cssText =
+          "opacity: 0; z-index: -1; transition: 0.3s";
+        $slider[nextIndex].style.cssText =
+          "opacity: 1; z-index: 1; transition: 0.3s";
+
+        currentIndex = nextIndex;
+      }, timemer);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!-- ex3_우에서좌로이동1>4 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @charset 'utf-8';
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .slide-wrap {
+        border: 1px solid tomato;
+        max-width: 600px;
+        width: 60%;
+        margin: auto;
+        position: relative;
+        overflow: hidden;
+      }
+      .slider-img {
+        display: flex;
+        width: 500%;
+      }
+      .slider {
+        width: calc(100% / 5);
+        overflow: hidden;
+        position: relative;
+        padding-top: 10%;
+      }
+
+      .slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>슬라이드 - 우 에서 좌로 이동 (4->1)</h1>
+    <section class="slide2">
+      <div class="slide-wrap">
+        <ul class="slider-img">
+          <li class="slider">
+            <img src="https://picsum.photos/400/600" alt="이미지1" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/800/550" alt="이미지2" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/600/600" alt="이미지3" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/400/350" alt="이미지4" />
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <script>
+      const $sliderWrap = document.querySelector(".slide-wrap"); //
+      const $sliderImg = document.querySelector(".slider-img"); //ul
+
+      let currentIndex = 0;
+      const sliderCount = $sliderImg.children.length;
+      let slideWidth = $sliderWrap.offsetWidth;
+      const timer = 3000;
+
+      // 첫 번째 슬라이드 복제 및 추가
+      $sliderImg.appendChild($sliderImg.firstElementChild.cloneNode(true));
+
+      const updateSlideWidth = () => {
+        slideWidth = $sliderWrap.offsetWidth;
+        $sliderImg.style.width = `${slideWidth * (sliderCount + 1)}px`;
+      };
+
+      const moveSlide = () => {
+        currentIndex++;
+
+        $sliderImg.style.transform = `translateX(-${
+          slideWidth * currentIndex
+        }px)`;
+        $sliderImg.style.transition = "1s";
+
+        // 마지막 요소일 때 transition 적용 없이 1번 슬라이드로 이동
+        if (currentIndex === sliderCount) {
+          setTimeout(() => {
+            $sliderImg.style.transition = "none";
+            $sliderImg.style.transform = "translateX(0)";
+            currentIndex = 0;
+          }, 1000);
+        }
+      };
+
+      window.addEventListener("resize", updateSlideWidth);
+      updateSlideWidth();
+
+      setInterval(moveSlide, timer);
+    </script>
+  </body>
+</html>

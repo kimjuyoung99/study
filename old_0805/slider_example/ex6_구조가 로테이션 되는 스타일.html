@@ -1,0 +1,272 @@
+<!-- 구조가 로테이션 되는 스타일 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./myreset.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      li {
+        list-style: none;
+      }
+
+      .slideSection {
+        max-width: 600px;
+        width: 80%;
+        margin: auto;
+        position: relative;
+      }
+
+      .btn {
+        cursor: pointer;
+      }
+      .btn,
+      .slider-dot {
+        position: absolute;
+      }
+      .slider-dot {
+        bottom: -30px;
+      }
+      .slider-dot > span {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: tomato;
+      }
+      .slider-dot > span:first-of-type {
+        background-color: black;
+        color: white;
+      }
+
+      .btn {
+        top: 50%;
+      }
+
+      .prev {
+        left: -50px;
+      }
+      .next {
+        right: -50px;
+      }
+      .slideCon {
+        overflow: hidden;
+      }
+      .sliderUl {
+        display: flex;
+        width: 300%;
+      }
+      .slider {
+        width: calc(100% / 3);
+      }
+.slider:nth-of-type() ~ .slider {
+  display: none;
+}
+
+      .slider > div {
+        position: relative;
+        padding-top: 35%;
+        overflow: hidden;
+      }
+      .slider > div > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .slider > div img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .slider > div p {
+        z-index: 1;
+        background-color: black;
+        color: white;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>슬라이드 연습</h1>
+      <section class="slideSection">
+        <h2>슬라이드 섹션영역</h2>
+        <div class="slideCon">
+          <ul class="sliderUl">
+            <li class="slider">
+              <div>
+                <p>슬라이드 번호1</p>
+                <img src="https://picsum.photos/700/500" alt="" />
+              </div>
+            </li>
+            <li class="slider">
+              <div>
+                <p>슬라이드 번호2</p>
+                <img src="https://picsum.photos/600/300" alt="" />
+              </div>
+            </li>
+            <li class="slider">
+              <div>
+                <p>슬라이드 번호3</p>
+                <img src="https://picsum.photos/700/400" alt="" />
+              </div>
+            </li>
+            <li class="slider">
+              <div>
+                <p>슬라이드 번호4</p>
+                <img src="https://picsum.photos/800/500" alt="" />
+              </div>
+            </li>
+            <li class="slider">
+              <div>
+                <p>슬라이드 번호5</p>
+                <img src="https://picsum.photos/900/600" alt="" />
+              </div>
+            </li>
+            <li class="slider">
+              <div>
+                <p>슬라이드 번호6</p>
+                <img src="https://picsum.photos/1000/700" alt="" />
+              </div>
+            </li>
+            <li class="slider">
+              <div>
+                <p>슬라이드 번호7</p>
+                <img src="https://picsum.photos/1100/800" alt="" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button class="btn prev">이전</button>
+        <button class="btn next">다음</button>
+        <div class="slider-dot"></div>
+      </section>
+    </main>
+
+    <script>
+      const $slideSection = document.querySelector(".slideSection");
+      const $sliderUl = $slideSection.querySelector(".sliderUl");
+      const $slider = $slideSection.querySelectorAll(".slider");
+      const $next = $slideSection.querySelector(".next");
+      const $prev = $slideSection.querySelector(".prev");
+
+      let $sliderDot = $slideSection.querySelector(".slider-dot");
+      let dotIndex = "";
+      let sliderCount = $slider.length;
+      let sliderWidth = 0;
+      let isAnimating = false;
+      let currentIndex = 0;
+
+      function calculateSliderWidth() {
+        const newWidth = $slider[0].querySelector("div").offsetWidth;
+        if (newWidth > 0 && newWidth !== sliderWidth) {
+          sliderWidth = newWidth;
+          console.log("슬라이드 넓이 다시 계산:", sliderWidth);
+          updateSliderPosition();
+        }
+      }
+
+      function updateSliderPosition() {
+        $sliderUl.style.transition = "none";
+        $sliderUl.style.transform = `translateX(-${
+          currentIndex * sliderWidth
+        }px)`;
+        void $sliderUl.offsetWidth;
+        $sliderUl.style.transition = "0.5s";
+      }
+
+      const resizeObserver = new ResizeObserver(() => {
+        calculateSliderWidth();
+      });
+      resizeObserver.observe($slideSection);
+
+      window.addEventListener("load", calculateSliderWidth);
+
+      $slider.forEach((a, i) => {
+        dotIndex += `<span class='dot' style='cursor:pointer; left:${
+          i * 30
+        }px'>${i + 1}</span>`;
+      });
+      $sliderDot.style.cssText = `width:${
+        sliderCount * 30
+      }px; left:50%; transform:translateX(-50%);`;
+      $sliderDot.innerHTML = dotIndex;
+
+      let $dot = document.querySelectorAll(".slider-dot > span");
+
+      function dotActive(i) {
+        $dot.forEach((dot, index) => {
+          dot.style.backgroundColor = index === i ? "black" : "tomato";
+          dot.style.color = index === i ? "white" : "black";
+        });
+      }
+
+      function moveSlide(direction, count = 1) {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        calculateSliderWidth();
+
+        const move = () => {
+          currentIndex = (currentIndex + direction + sliderCount) % sliderCount;
+          $sliderUl.style.transition = "0.5s";
+          $sliderUl.style.transform = `translateX(-${
+            currentIndex * sliderWidth
+          }px)`;
+
+          setTimeout(() => {
+            $sliderUl.style.transition = "none";
+            if (currentIndex === 0 && direction > 0) {
+              currentIndex = sliderCount;
+              $sliderUl.style.transform = `translateX(-${
+                currentIndex * sliderWidth
+              }px)`;
+            } else if (currentIndex === sliderCount - 1 && direction < 0) {
+              currentIndex = -1;
+              $sliderUl.style.transform = `translateX(-${
+                currentIndex * sliderWidth
+              }px)`;
+            }
+            void $sliderUl.offsetWidth;
+            $sliderUl.style.transition = "0.5s";
+            isAnimating = false;
+          }, 500);
+        };
+
+        move();
+        dotActive(currentIndex);
+      }
+
+      $next.addEventListener("click", () => {
+        if (!isAnimating) moveSlide(1);
+      });
+
+      $prev.addEventListener("click", () => {
+        if (!isAnimating) moveSlide(-1);
+      });
+
+      $dot.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          if (isAnimating) return;
+          const direction = index - currentIndex;
+          if (direction !== 0) {
+            moveSlide(Math.sign(direction), Math.abs(direction));
+          }
+        });
+      });
+
+      window.addEventListener("resize", calculateSliderWidth);
+
+      // 초기 설정
+      calculateSliderWidth();
+      dotActive(currentIndex);
+    </script>
+  </body>
+</html>

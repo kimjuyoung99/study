@@ -1,0 +1,209 @@
+<!-- 버튼을 클릭하면 우에서 좌로 이동. dot pagination 추가 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @charset 'utf-8';
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .slide2 {
+        border: 1px solid red;
+        position: relative;
+        padding-bottom: 4rem;
+      }
+      .btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .prev {
+        left: 2rem;
+      }
+      .next {
+        right: 2rem;
+      }
+      .slide-wrap {
+        border: 1px solid tomato;
+        max-width: 600px;
+        width: 60%;
+        margin: auto;
+        position: relative;
+        overflow: hidden;
+      }
+      .slider-img {
+        display: flex;
+        width: 400%;
+      }
+      .slider {
+        width: calc(100% / 4);
+        overflow: hidden;
+        position: relative;
+        padding-top: 20%;
+      }
+      .slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+      }
+      .slider-dot {
+        border: 1px solid red;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 1rem;
+      }
+      .slider-dot .dot {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        color: transparent;
+        background-color: lightgrey;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .slider-dot .dot:hover {
+        background-color: antiquewhite;
+      }
+      .slider-dot .dot.active {
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>슬라이드 - 버튼을 클릭하면 우에서 좌로 이동. dot pagination 추가</h1>
+    <section class="slide2">
+      <div class="slide-wrap">
+        <ul class="slider-img">
+          <li class="slider">
+            <img src="https://picsum.photos/400/600" alt="이미지1" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/800/550" alt="이미지2" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/600/600" alt="이미지3" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/400/350" alt="이미지4" />
+          </li>
+        </ul>
+      </div>
+      <button class="btn prev">이전</button>
+      <button class="btn next">다음</button>
+      <div class="slider-dot"></div>
+    </section>
+
+    <script>
+      const $sliderImg = document.querySelector(".slider-img");
+      const $slideWrap = document.querySelector(".slide-wrap");
+      const $btnPrev = document.querySelector(".prev");
+      const $btnNext = document.querySelector(".next");
+      const $sliderDot = document.querySelector(".slider-dot");
+
+      let currentIndex = 0;
+      const sliderCount = $sliderImg.children.length;
+
+      // 첫번째와 마지막 슬라이드를 추가했기 때문에 총 개수에서 2개 추가된 값으로 넓이 생성
+      const updateSlideWidth = () => {
+        const slideWidth = $slideWrap.offsetWidth;
+        $sliderImg.style.width = `${slideWidth * (sliderCount + 2)}px`;
+        return slideWidth;
+      };
+      // 초기 slide 넓이 생성
+      let slideWidth = updateSlideWidth();
+
+      const setupSlider = () => {
+        const firstClone = $sliderImg.firstElementChild.cloneNode(true);
+        const lastClone = $sliderImg.lastElementChild.cloneNode(true);
+        $sliderImg.appendChild(firstClone);
+        $sliderImg.prepend(lastClone);
+        updateSliderPosition();
+      };
+
+      const updateSliderPosition = (transition = false) => {
+        $sliderImg.style.transition = transition
+          ? "transform 0.5s ease-in-out"
+          : "none";
+        $sliderImg.style.transform = `translateX(-${
+          slideWidth * (currentIndex + 1)
+        }px)`;
+      };
+
+      // 리스트의 수만큼 빈 배열 생성하고, span요소로 변경
+      // 모든 span을 배열로 반환
+      const createDots = () => {
+        $sliderDot.innerHTML = Array.from(
+          { length: sliderCount },
+          (_, i) => `<span class="dot" data-index="${i}">${i + 1}</span>`
+        ).join("");
+        return $sliderDot.querySelectorAll(".dot");
+      };
+
+      const $dots = createDots();
+
+      // 슬라이드 index와 같을 때 dot에 class 적용
+      const updateActiveDot = () => {
+        $dots.forEach((dot, i) =>
+          dot.classList.toggle("active", i === currentIndex)
+        );
+      };
+
+      const moveSlide = (index) => {
+        currentIndex = index;
+        updateSliderPosition(true);
+        updateActiveDot();
+      };
+
+      // 마지막 슬라이드일 때와, 첫번 째 슬라이드 일 때 index 재설정
+      const handleSlideTransitionEnd = () => {
+        if (currentIndex === sliderCount) {
+          currentIndex = 0;
+        } else if (currentIndex === -1) {
+          currentIndex = sliderCount - 1;
+        }
+        updateSliderPosition();
+        updateActiveDot();
+      };
+
+      // 슬라이드의 방향
+      const moveDirection = (direction) => () =>
+        moveSlide(currentIndex + direction);
+
+      // 이벤트 리스너
+      window.addEventListener("resize", () => {
+        slideWidth = updateSlideWidth();
+        updateSliderPosition();
+      });
+
+      $btnNext.addEventListener("click", moveDirection(1));
+      $btnPrev.addEventListener("click", moveDirection(-1));
+      $sliderImg.addEventListener("transitionend", handleSlideTransitionEnd);
+
+      $sliderDot.addEventListener("click", (e) => {
+        if (e.target.classList.contains("dot")) {
+          moveSlide(parseInt(e.target.dataset.index));
+        }
+      });
+
+      setupSlider();
+      updateActiveDot();
+    </script>
+  </body>
+</html>

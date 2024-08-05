@@ -1,0 +1,98 @@
+<!-- 우에서 좌로 이동 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @charset 'utf-8';
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .slide2 {
+        border: 1px solid tomato;
+      }
+      .slide-wrap {
+        max-width: 600px;
+        width: 60%;
+        margin: auto;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+      }
+      .slider-img {
+        display: flex;
+        width: 400%;
+      }
+      .slider {
+        width: calc(100% / 4);
+        overflow: hidden;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>슬라이드 - 우 에서 좌로 이동</h1>
+    <section class="slide2">
+      <div class="slide-wrap">
+        <ul class="slider-img">
+          <li class="slider">
+            <img src="https://picsum.photos/400/600" alt="이미지1" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/800/550" alt="이미지2" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/600/600" alt="이미지3" />
+          </li>
+          <li class="slider">
+            <img src="https://picsum.photos/400/350" alt="이미지4" />
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <script>
+      const $sliderImg = document.querySelector(".slider-img"); //ul
+      const $slider = document.querySelectorAll(".slider"); // li
+
+      let currentIndex = 0;
+      let sliderCount = $slider.length;
+      // 하나의 슬라이드 넓이
+      let slideWidth = document.querySelector(".slide-wrap").offsetWidth;
+      let timemer = 3000;
+
+      window.addEventListener("resize", () => {
+        slideWidth = document.querySelector(".slide-wrap").offsetWidth;
+      });
+
+      setInterval(() => {
+        let nextIndex = (currentIndex + 1) % sliderCount;
+
+        $sliderImg.style.cssText = `transform: translateX(-${
+          slideWidth * nextIndex
+        }px); transition: 1s;`;
+
+        currentIndex = nextIndex;
+      }, timemer);
+
+      // 마지막 슬라이드에서 첫번째 슬라이드로 이동하는 방향이 부자연스러움
+    </script>
+  </body>
+</html>
