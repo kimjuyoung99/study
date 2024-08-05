@@ -1,224 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    li {
-      list-style: none;
-    }
-    
-    .slide {
-      border: 5px solid lightgray;
-      max-width: 600px;
-      width: 80%;
-      margin: auto;
-      position: relative;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      li {
+        list-style: none;
+      }
+      .slide {
+        /* border: 5px solid lightgray; */
+        max-width: 600px;
+        width: 80%;
+        margin: auto;
+        position: relative;
+        margin-top: 20%;
+      }
+      .slide-wrap {
+        width: 100%;
+        height: 100%;
+      }
+      .btn {
+        cursor: pointer;
+      }
+      .btn,
+      .slider-dot {
+        position: absolute;
+        background-color: rgb(0, 213, 255);
+      }
+      .slider-dot {
+        left: 40%;
+        bottom: -30px;
+      }
+      .slider-dot > span {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: tomato;
+      }
+      .slider-dot > span:first-of-type {
+        background-color: black;
+        color: white;
+      }
+      .dot1 {
+        left: 0;
+      }
+      .dot2 {
+        left: 30px;
+      }
+      .dot3 {
+        left: 60px;
+      }
 
-    .btn {
-      cursor: pointer;
-    }
-    .btn,
-    .slider-dot {
-      border: 5px solid rgb(0, 213, 255);
-      position: absolute;
-      background-color: rgb(0, 213, 255);
-    }
-    .slider-dot {
-      left: 40%;
-      bottom: -30px;
-    }
-    .slider-dot > span {
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background-color: tomato;
-    }
-    .slider-dot > span:first-of-type {
-      background-color: black;
-      color: white;
-    }
-    .dot1 {
-      left: 0;
-    }
-    .dot2 {
-      left: 30px;
-    }
-    .dot3 {
-      left: 60px;
-    }
-    
-    .btn {
-      top: 50%;
-    }
-    
-    .prev {
-      left: -50px;
-    }
-    .next {
-      right: -50px;
-    }
-    .slide-wrap {
-      overflow: hidden;
-    }
-    .sliderUl {
-      display: flex;
-      width: 600%; 
-      transition: transform 0.6s ease; 
-    }
-    .sldier {
-      width: 16.666%;
-      opacity: 1;
-    }
+      .btn {
+        top: 50%;
+      }
 
-    .sldier > div {
-      position: relative;
-      padding-top: 35%;
-      overflow: hidden;
-    }
-    .sldier > div > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .sldier > div img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .sldier > div p {
-      z-index: 1;
-      background-color: black;
-      color: white;
-      padding: 2rem;
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <section class="slide">
-      <div class="slide-wrap">
-        <ul class="sliderUl">
-          <li class="sldier">
-            <div>
-              <p>슬라이드1</p>
-              <img src="https://picsum.photos/400/600" alt="" />
-            </div>
-          </li>
-          <li class="sldier">
-            <div>
-              <p>슬라이드2</p>
-              <img src="https://picsum.photos/800/500" alt="" />
-            </div>  
-          </li>
-          <li class="sldier">
-            <div>
-              <p>슬라이드3</p>
-              <img src="https://picsum.photos/300/600" alt="" />
-            </div>
-          </li>
-        </ul>
-      </div>
-      <button class="btn prev">이전</button>
-      <button class="btn next">다음</button>
-      <div class="slider-dot">
-        <span class="dot1">1</span>
-        <span class="dot2">2</span>
-        <span class="dot3">3</span>
-      </div>
-    </section>
-  </main>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const sliderUl = document.querySelector('.sliderUl'); // 슬라이더의 ul 요소를 선택
-      const slides = document.querySelectorAll('.sldier'); // 각 슬라이드를 선택
-      const prevBtn = document.querySelector('.prev'); // 이전 버튼을 선택
-      const nextBtn = document.querySelector('.next'); // 다음 버튼을 선택
-      const dots = document.querySelectorAll('.slider-dot span'); // 슬라이드 네비게이션 도트를 선택
-  
-      let currentIndex = 0; // 현재 슬라이드 인덱스를 초기화
-      const slideCount = slides.length; // 슬라이드 개수를 저장
-  
-      function initSlider() {
-        const firstSlideClone = slides[0].cloneNode(true); // 첫 번째 슬라이드를 복제
-        const lastSlideClone = slides[slideCount - 1].cloneNode(true); // 마지막 슬라이드를 복제
-        sliderUl.appendChild(firstSlideClone); // 첫 번째 슬라이드를 슬라이더의 끝에 추가
-        sliderUl.insertBefore(lastSlideClone, slides[0]); // 마지막 슬라이드를 슬라이더의 앞에 추가
-  
-        sliderUl.style.width = `${(slideCount + 2) * 100}%`; // 슬라이더의 너비를 슬라이드 개수에 맞게 조정
-        const allSlides = sliderUl.querySelectorAll('.sldier'); // 모든 슬라이드를 다시 선택
-        allSlides.forEach(slide => {
-          slide.style.width = `${100 / (slideCount + 2)}%`; // 각 슬라이드의 너비를 조정
-        });
-  
-        sliderUl.style.transform = `translateX(-${100 / (slideCount + 2)}%)`; // 슬라이더를 첫 슬라이드 위치로 이동
-        currentIndex = 0; // 현재 인덱스를 초기화
-        updateDots(); // 도트를 업데이트
+      .prev {
+        left: -50px;
       }
-  
-      function updateSlider(index) {
-        sliderUl.style.transition = 'transform 0.6s ease-out'; // 슬라이더의 이동 애니메이션 설정
-        sliderUl.style.transform = `translateX(-${(index + 1) * (100 / (slideCount + 2))}%)`; // 슬라이더를 새로운 인덱스로 이동
-        currentIndex = index; // 현재 인덱스를 업데이트
-        updateDots(); // 도트를 업데이트
+      .next {
+        right: -50px;
       }
-  
-      function nextSlide() {
-        if (currentIndex >= slideCount - 1) { // 마지막 슬라이드일 경우
-          updateSlider(slideCount); // 슬라이더를 마지막 복제 슬라이드로 이동
-          setTimeout(() => {
-            sliderUl.style.transition = 'none'; // 애니메이션을 제거
-            sliderUl.style.transform = `translateX(-${100 / (slideCount + 2)}%)`; // 슬라이더를 첫 번째 슬라이드로 이동
-            currentIndex = 0; // 현재 인덱스를 초기화
-            updateDots(); // 도트를 업데이트
-          }, 600); // 애니메이션 시간 이후 실행
-        } else {
-          updateSlider(currentIndex + 1); // 다음 슬라이드로 이동
+      .slide-wrap {
+        overflow: hidden;
+      }
+      .sliderUl {
+        display: flex;
+        width: 600%;
+        transition: transform 0.6s ease;
+      }
+      .sldier {
+        width: 16.666%;
+        opacity: 1;
+      }
+
+      .sldier > div {
+        position: relative;
+        padding-top: 50%;
+        overflow: hidden;
+      }
+      .sldier > div > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .sldier > div img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .sldier > div p {
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.3); /* 배경 투명도 조정 */
+        color: white;
+        text-align: center; /* 텍스트 위치 중앙 정렬 */
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        margin-top: 2%;
+        margin-left: 3%;
+        border-radius: 3rem;
+        width: 150px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="slide">
+        <div class="slide-wrap">
+          <ul class="sliderUl">
+            <li class="sldier">
+              <div>
+                <p>슬라이드1</p>
+                <img src="https://picsum.photos/800/500" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드2</p>
+                <img src="https://picsum.photos/900/600" alt="" />
+              </div>
+            </li>
+            <li class="sldier">
+              <div>
+                <p>슬라이드3</p>
+                <img src="https://picsum.photos/1000/700" alt="" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button class="btn prev">이전</button>
+        <button class="btn next">다음</button>
+        <div class="slider-dot">
+          <span class="dot1">1</span>
+          <span class="dot2">2</span>
+          <span class="dot3">3</span>
+        </div>
+      </section>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sliderUl = document.querySelector(".sliderUl"); // 슬라이더의 ul 요소를 선택
+        const slides = document.querySelectorAll(".sldier"); // 각 슬라이드를 선택
+        const prevBtn = document.querySelector(".prev"); // 이전 버튼을 선택
+        const nextBtn = document.querySelector(".next"); // 다음 버튼을 선택
+        const dots = document.querySelectorAll(".slider-dot span"); // 슬라이드 네비게이션 도트를 선택
+
+        let currentIndex = 0; // 현재 슬라이드 인덱스를 초기화
+        const slideCount = slides.length; // 슬라이드 개수를 저장
+
+        function initSlider() {
+          const firstSlideClone = slides[0].cloneNode(true); // 첫 번째 슬라이드를 복제
+          const lastSlideClone = slides[slideCount - 1].cloneNode(true); // 마지막 슬라이드를 복제
+          sliderUl.appendChild(firstSlideClone); // 첫 번째 슬라이드를 슬라이더의 끝에 추가
+          sliderUl.insertBefore(lastSlideClone, slides[0]); // 마지막 슬라이드를 슬라이더의 앞에 추가
+
+          sliderUl.style.width = `${(slideCount + 2) * 100}%`; // 슬라이더의 너비를 슬라이드 개수에 맞게 조정
+          const allSlides = sliderUl.querySelectorAll(".sldier"); // 모든 슬라이드를 다시 선택
+          allSlides.forEach((slide) => {
+            slide.style.width = `${100 / (slideCount + 2)}%`; // 각 슬라이드의 너비를 조정
+          });
+
+          sliderUl.style.transform = `translateX(-${100 / (slideCount + 2)}%)`; // 슬라이더를 첫 슬라이드 위치로 이동
+          currentIndex = 0; // 현재 인덱스를 초기화
+          updateDots(); // 도트를 업데이트
         }
-      }
-  
-      function prevSlide() {
-        if (currentIndex <= 0) { // 첫 슬라이드일 경우
-          updateSlider(-1); // 슬라이더를 첫 번째 복제 슬라이드로 이동
-          setTimeout(() => {
-            sliderUl.style.transition = 'none'; // 애니메이션을 제거
-            sliderUl.style.transform = `translateX(-${slideCount * (100 / (slideCount + 2))}%)`; // 슬라이더를 마지막 슬라이드로 이동
-            currentIndex = slideCount - 1; // 현재 인덱스를 마지막 슬라이드로 설정
-            updateDots(); // 도트를 업데이트
-          }, 600); // 애니메이션 시간 이후 실행
-        } else {
-          updateSlider(currentIndex - 1); // 이전 슬라이드로 이동
+
+        function updateSlider(index) {
+          sliderUl.style.transition = "transform 0.6s ease-out"; // 슬라이더의 이동 애니메이션 설정
+          sliderUl.style.transform = `translateX(-${
+            (index + 1) * (100 / (slideCount + 2))
+          }%)`; // 슬라이더를 새로운 인덱스로 이동
+          currentIndex = index; // 현재 인덱스를 업데이트
+          updateDots(); // 도트를 업데이트
         }
-      }
-  
-      function updateDots() {
+
+        function nextSlide() {
+          if (currentIndex >= slideCount - 1) {
+            // 마지막 슬라이드일 경우
+            updateSlider(slideCount); // 슬라이더를 마지막 복제 슬라이드로 이동
+            setTimeout(() => {
+              sliderUl.style.transition = "none"; // 애니메이션을 제거
+              sliderUl.style.transform = `translateX(-${
+                100 / (slideCount + 2)
+              }%)`; // 슬라이더를 첫 번째 슬라이드로 이동
+              currentIndex = 0; // 현재 인덱스를 초기화
+              updateDots(); // 도트를 업데이트
+            }, 600); // 애니메이션 시간 이후 실행
+          } else {
+            updateSlider(currentIndex + 1); // 다음 슬라이드로 이동
+          }
+        }
+
+        function prevSlide() {
+          if (currentIndex <= 0) {
+            // 첫 슬라이드일 경우
+            updateSlider(-1); // 슬라이더를 첫 번째 복제 슬라이드로 이동
+            setTimeout(() => {
+              sliderUl.style.transition = "none"; // 애니메이션을 제거
+              sliderUl.style.transform = `translateX(-${
+                slideCount * (100 / (slideCount + 2))
+              }%)`; // 슬라이더를 마지막 슬라이드로 이동
+              currentIndex = slideCount - 1; // 현재 인덱스를 마지막 슬라이드로 설정
+              updateDots(); // 도트를 업데이트
+            }, 600); // 애니메이션 시간 이후 실행
+          } else {
+            updateSlider(currentIndex - 1); // 이전 슬라이드로 이동
+          }
+        }
+
+        function updateDots() {
+          dots.forEach((dot, index) => {
+            dot.style.backgroundColor =
+              index === currentIndex ? "black" : "tomato"; // 현재 슬라이드의 도트를 검정색으로 변경
+            dot.style.color = index === currentIndex ? "white" : "black"; // 현재 슬라이드의 도트 텍스트를 흰색으로 변경
+          });
+        }
+
+        nextBtn.addEventListener("click", nextSlide); // 다음 버튼 클릭 시 nextSlide 함수 호출
+        prevBtn.addEventListener("click", prevSlide); // 이전 버튼 클릭 시 prevSlide 함수 호출
+
         dots.forEach((dot, index) => {
-          dot.style.backgroundColor = index === currentIndex ? 'black' : 'tomato'; // 현재 슬라이드의 도트를 검정색으로 변경
-          dot.style.color = index === currentIndex ? 'white' : 'black'; // 현재 슬라이드의 도트 텍스트를 흰색으로 변경
+          dot.addEventListener("click", () => {
+            updateSlider(index); // 도트 클릭 시 해당 슬라이드로 이동
+          });
         });
-      }
-  
-      nextBtn.addEventListener('click', nextSlide); // 다음 버튼 클릭 시 nextSlide 함수 호출
-      prevBtn.addEventListener('click', prevSlide); // 이전 버튼 클릭 시 prevSlide 함수 호출
-  
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          updateSlider(index); // 도트 클릭 시 해당 슬라이드로 이동
-        });
+
+        initSlider(); // 슬라이더 초기화 함수 호출
+        //opacity와 updateVisibility 함수 호출을 제거하여 밀려 나가듯이 슬라이드 설정
       });
-  
-      initSlider(); // 슬라이더 초기화 함수 호출
-      //opacity와 updateVisibility 함수 호출을 제거하여 밀려 나가듯이 슬라이드 설정 
-    });
-  </script>
-  
-</body>
+    </script>
+  </body>
 </html>
