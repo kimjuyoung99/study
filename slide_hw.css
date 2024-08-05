@@ -76,11 +76,17 @@
   
   .sldier {
     border: 5px solid red;
-    width: 16.666%; /* 100% / 6 (전체 슬라이드 개수) */
+    width: 16.666%;
+    opacity: 0; /* 기본적으로 슬라이드를 보이지 않게 설정 */
+    transition: opacity 0.3s ease-out; /* 슬라이드 전환 애니메이션 설정 */
+  }
+  
+  .sldier.active {
+    opacity: 1; /* active 클래스가 있는 슬라이드는 보이게 설정 */
   }
   
   .sldier:nth-of-type(3) ~ .sldier {
-    display: block; /* 모든 슬라이드 표시 */
+    display: hidden; /* 모든 슬라이드 표시 */
   }
   .sldier > div {
     position: relative;
