@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  li {
+    list-style: none;
+  }
+  
+  .slide {
+    border: 5px solid lightgray;
+    max-width: 600px;
+    width: 80%;
+    margin: auto;
+    position: relative;
+  }
+  .slide-wrap {
+    border: 1px solid red;
+  }
+  .btn {
+    cursor: pointer;
+  }
+  .btn,
+  .slider-dot {
+    border: 5px solid rgb(0, 213, 255);
+    position: absolute;
+  }
+  .slider-dot {
+    left: 40%;
+    bottom: -30px;
+  }
+  .slider-dot > span {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: tomato;
+  }
+  .slider-dot > span:first-of-type {
+    background-color: black;
+    color: white;
+  }
+  .dot1 {
+    left: 0;
+  }
+  .dot2 {
+    left: 30px;
+  }
+  .dot3 {
+    left: 60px;
+  }
+  .dot4 {
+    left: 90px;
+  }
+  
+  .btn {
+    top: 50%;
+  }
+  
+  .prev {
+    left: -50px;
+  }
+  .next {
+    right: -50px;
+  }
+  .slide-wrap {
+    border: 5px solid lightgreen;
+    /* overflow: hidden; */
+  }
+  .sliderUl {
+    border: 5px slateblue solid;
+    display: flex;
+    width: 300%;
+    /* transform: translateX(-33.3333%); */
+  }
+  .sldier {
+    border: 5px solid red;
+    width: calc(100% / 3);
+  }
+  .sldier:nth-of-type(3) ~ .sldier {
+    display: none;
+  }
+  .sldier > div {
+    position: relative;
+    padding-top: 35%;
+    overflow: hidden;
+  }
+  .sldier > div > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .sldier > div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .sldier > div p {
+    z-index: 1;
+    background-color: black;
+    color: white;
+    padding: 2rem;
+  }
