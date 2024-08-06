@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>환율계산기</title>
+    <style>
+      /* 스타일 추가 */
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>환율계산기</h1>
+      <div class="con">
+        <div class="currency">
+          <p></p>
+          <select name="currency-one" id="currency-one"></select>
+          <input type="number" id="amount-one" value="1" />
+        </div>
+
+        <div class="currency">
+          <p></p>
+          <select name="currency-two" id="currency-two"></select>
+          <input type="number" id="amount-two" value="1" />
+        </div>
+        <button id="swap">바꾸기</button>
+      </div>
+      <p id="rate"></p>
+    </div>
+
+    <script>
+      async function fetchExchangeRates() {
+        try {
+          const response = await fetch('https://open.exchangerate-api.com/v6/latest');
+          const data = await response.json();
+          console.log(data);
+
+          const currencyOne = document.getElementById('currency-one');
+          const currencyTwo = document.getElementById('currency-two');
+          const rateEl = document.getElementById('rate');
+
+          const rates = data.rates;
+
+          // 통화 선택 목록을 채웁니다.
+          for (const currency in rates) {
+            const option1 = document.createElement('option');
+            const option2 = document.createElement('option');
+            option1.value = currency;
+            option2.value = currency;
+            option1.textContent = currency;
+            option2.textContent = currency;
+            currencyOne.appendChild(option1);
+            currencyTwo.appendChild(option2);
+          }
+
+          // KRW를 초기값으로 설정
+          currencyTwo.value = 'KRW';
+
+          function calculate() {
+            const amountOne = document.getElementById('amount-one').value;
+            const amountTwo = document.getElementById('amount-two');
+            const rate = rates[currencyTwo.value] / rates[currencyOne.value];
+            amountTwo.value = (amountOne * rate).toFixed(2);
+            rateEl.textContent = `1 ${currencyOne.value} = ${rate.toFixed(4)} ${currencyTwo.value}`;
+          }
+
+          currencyOne.addEventListener('change', calculate);
+          currencyTwo.addEventListener('change', calculate);
+          document.getElementById('amount-one').addEventListener('input', calculate);
+          document.getElementById('swap').addEventListener('click', () => {
+            const temp = currencyOne.value;
+            currencyOne.value = currencyTwo.value;
+            currencyTwo.value = temp;
+            calculate();
+          });
+
+          // 초기 계산 수행
+          calculate();
+        } catch (error) {
+          console.error('Error fetching exchange rates:', error);
+        }
+      }
+
+      // 페이지 로드 시 환율 데이터를 가져옴
+      window.addEventListener('load', fetchExchangeRates);
+    </script>
+  </body>
+</html>

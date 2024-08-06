@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: rgb(61, 123, 162);
+        color: white;
+      }
+      li {
+        list-style: none;
+      }
+      .wrap {
+        max-width: 600px;
+        width: 80%;
+        margin: auto;
+      }
+      h1 {
+        text-align: center;
+        padding: 100px 0 1rem 0;
+      }
+      .filter-con {
+        margin-bottom: 2rem;
+      }
+      .filter-con input {
+        width: 100%;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+      }
+      .filter-con input:focus {
+        background-color: lightgoldenrodyellow;
+      }
+
+      .post {
+        border-radius: 10px;
+        background-color: rgb(122, 187, 224);
+        margin-bottom: 2rem;
+        padding: 2rem;
+        position: relative;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      .post-number {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: white;
+        top: -10px;
+        left: -10px;
+        color: dodgerblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      .loader.show {
+        opacity: 1;
+      }
+      .loader {
+        opacity: 0;
+        transition: opacity 0.2s;
+        border: 1px solid yellow;
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 30px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      .loader span {
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        animation: bounce 0.25s ease-in infinite alternate;
+      }
+      .loader span:nth-of-type(2) {
+        animation-delay: 0.1s;
+      }
+      .loader span:nth-of-type(3) {
+        animation-delay: 0.2s;
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>무한스크롤</h1>
+      <div class="filter-con">
+        <input type="text" id="filter" placeholder="검색어를 입력해 주세요" />
+      </div>
+      <ul id="posts-con">
+        <!-- 컨텐츠가 들어가는 영역 -->
+      </ul>
+    </div>
+
+    <script>
+      const loader = document.createElement("div");
+      loader.classList.add("loader");
+      loader.innerHTML = `
+            <span></span>
+            <span></span>
+            <span></span>
+        `;
+      document.querySelector(".wrap").appendChild(loader);
+
+      const $postsCon = document.getElementById("posts-con");
+      const $loader = document.querySelector(".loader");
+
+      let limit = 5;
+      let page = 1;
+      let isLoading = false;
+
+      const getPosts = async () => {
+        const res = await fetch(
+          `https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`
+        );
+        const data = await res.json();
+        return data;
+      };
+
+      const showPosts = async () => {
+        const posts = await getPosts();
+        console.log(posts);
+
+        posts.forEach((post) => {
+          const postElm = document.createElement("li");
+          postElm.classList.add("post");
+          postElm.innerHTML = `
+            <span class="post-number">${post.id}</span>
+            <div class="post-info">
+                <h2 class="post-title">${post.title}</h2>
+                <p class="post-body">${post.body}</p>
+            </div>
+            `;
+          $postsCon.appendChild(postElm);
+        });
+      };
+      showPosts();
+
+      const newLoading = () => {
+        if (isLoading) return;
+        isLoading = true;
+        $loader.classList.add("show");
+        setTimeout(async () => {
+          page++;
+          console.log(page);
+          await showPosts();
+          isLoading = false;
+          $loader.classList.remove("show");
+        }, 1000);
+      };
+      window.addEventListener("scroll", () => {
+        const { scrollTop, scrollHeight, clientHeight } =
+          document.documentElement;
+        if (scrollTop + clientHeight >= scrollHeight - 20) {
+          // 새로운 데이터를 호출
+          newLoading();
+        }
+      });
+    </script>
+  </body>
+</html>

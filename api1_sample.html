@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>무한 스크롤</title>
+    <style>
+      :root {
+        --p-color: #296ca8;
+        --p-light: #4992d3;
+        --shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: var(--p-color);
+        color: white;
+      }
+      li {
+        list-style: none;
+      }
+      .wrap {
+        max-width: 600px;
+        width: 80%;
+        margin: auto;
+      }
+      h1 {
+        text-align: center;
+        padding: 100px 0 1rem 0;
+      }
+      .filter-con input {
+        width: 100%;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+      .filter-con input:focus {
+        background-color: lightgoldenrodyellow;
+      }
+      .post {
+        border-radius: 10px;
+        background-color: var(--p-light);
+        margin-bottom: 2rem;
+        padding: 2rem;
+        position: relative;
+        box-shadow: var(--shadow);
+      }
+      .post-number {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 50%;
+        background-color: white;
+        border-radius: 50%;
+        top: -15px;
+        left: -15px;
+        color: var(--p-light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .loader {
+        display: none;
+        margin-bottom: 25px;
+        width: 100%;
+        height: 30px;
+        display: none;
+        justify-content: center;
+        gap: 10px;
+      }
+      .loader.show {
+        display: flex;
+      }
+      .loader span {
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        animation: bounce 0.4s ease-in infinite alternate;
+      }
+      .loader span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .loader span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>무한 스크롤</h1>
+      <div class="filter-con">
+        <input type="text" id="filter" placeholder="검색어를 입력하삼~" />
+      </div>
+      <ul class="posts-con"></ul>
+    </div>
+    <script>
+      // 요구사항
+      // https://jsonplaceholder.typicode.com/ 활용
+      // 1. 제공된 posts 데이터를 fetch()로 호출
+      // 2. 한번에 5개씩 호출
+      // 3. 스크롤이 끝까지 다다르면 새로운 5개를 호출
+      // 4. 새로운 데이터가 로드되는 동안 로딩 ui
+      // 5. 검색 기능 적용
+      const LIMIT = 5;
+      const $postsCon = document.querySelector(".posts-con");
+      const $filter = document.getElementById("filter");
+      const $loader = document.createElement("div");
+      let page = 1;
+      let isLoading = false;
+      let currentTerm = "";
+
+      const getPosts = async (searchTerm = "") => {
+        let url = `https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${page}`;
+        if (searchTerm) url += `&q=${searchTerm}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+      };
+
+      const showPosts = async () => {
+        const fragment = new DocumentFragment();
+        const posts = await getPosts(currentTerm);
+        posts?.forEach((post) => {
+          const $postElm = document.createElement("li");
+          $postElm.classList.add("post");
+          $postElm.innerHTML = `<span class="post-number">${post.id}</span>
+          <div class="post-info">
+            <h2 class="post-title">${post.title}</h2>
+            <p class="post-body">${post.body}</p>
+          </div>`;
+          fragment.appendChild($postElm);
+        });
+        $postsCon.appendChild(fragment);
+      };
+      const newLoading = () => {
+        if (isLoading) return;
+        isLoading = true;
+        $loader.classList.add("show");
+        setTimeout(async () => {
+          page++;
+          await showPosts();
+          isLoading = false;
+          $loader.classList.remove("show");
+        }, 1000);
+      };
+      const filterPosts = () => {
+        const searchTerm = $filter.value.trim();
+        if (searchTerm !== currentTerm) {
+          currentTerm = searchTerm;
+          page = 1;
+          $postsCon.innerHTML = "";
+          showPosts();
+        }
+      };
+
+      const init = async function () {
+        //postsCon(UL)의 Top + Height이 clientHeight보다 작으면 newLoading 호출
+        $loader.classList.add("loader");
+        $loader.innerHTML = `<span></span><span></span><span></span>`;
+        document.body.appendChild($loader);
+        let top = $postsCon.getBoundingClientRect().top;
+        let height = $postsCon.getBoundingClientRect().height;
+        while (top + height < document.documentElement.clientHeight) {
+          await showPosts();
+          page++;
+          top = $postsCon.getBoundingClientRect().top;
+          height = $postsCon.getBoundingClientRect().height;
+        }
+      };
+      init();
+      window.addEventListener("wheel", function (e) {
+        const { deltaY } = e;
+        const { scrollTop, scrollHeight, clientHeight } =
+          document.documentElement;
+        if (scrollTop + clientHeight >= scrollHeight - 20 && deltaY > 0) {
+          newLoading();
+        }
+      });
+      $filter.addEventListener("keyup", filterPosts);
+    </script>
+  </body>
+</html>
