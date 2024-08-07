@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>환율계산기</title>
     <style>
-      /* 스타일 추가 */
+      :root {
+        --p-color: #e9e9e9;
+        --p-secondColor: #4992d3;
+        --shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      body {
+        background-color: var(--p-color);
+      }
     </style>
   </head>
   <body>
@@ -13,7 +20,7 @@
       <h1>환율계산기</h1>
       <div class="con">
         <div class="currency-one">
-          <p>통화 1</p>
+          <p>Amount</p>
           <select id="currency-one">
             <option value="USD" selected>USD</option>
           </select>
@@ -21,7 +28,7 @@
         </div>
 
         <div class="currency-two">
-          <p>통화 2</p>
+          <p>Converted Amount</p>
           <select id="currency-two">
             <option value="KRW" selected>KRW</option>
           </select>
@@ -29,28 +36,29 @@
         </div>
         <button id="swap">바꾸기</button>
       </div>
-      <p id="rate"></p>
+      <p id="rate">표시환ㅊㅊㅊㅊ률</p>
     </div>
-
 
     <script>
       // API 데이터를 통신 함수
       async function fetchExchangeRates() {
         try {
-          const response = await fetch('https://open.exchangerate-api.com/v6/latest');
-          //데이터를 JSON형태로 가져온다.
+          const response = await fetch(
+            "https://open.exchangerate-api.com/v6/latest"
+          );
+          //데이터를 JSON형태로 가져옴
           const data = await response.json();
-          console.log(data);//확인용 console
+          console.log(data); //확인용 console
 
-          const currencyOne = document.getElementById('currency-one');
-          const currencyTwo = document.getElementById('currency-two');
-          const rateEl = document.getElementById('rate');
+          const currencyOne = document.getElementById("currency-one"); //첫 번째 통화
+          const currencyTwo = document.getElementById("currency-two"); //두 번째 통화
+          const rateEl = document.getElementById("rate"); //환률 정보
           const rates = data.rates;
           //통화 목록
           //통화 목록을 <select> 요소에 동적으로 추가
-          for(const currency in rates){
-            const option1 = document.createElement('option');
-            const option2 = document.createElement('option');
+          for (const currency in rates) {
+            const option1 = document.createElement("option");
+            const option2 = document.createElement("option");
             option1.value = currency;
             option2.value = currency;
             option1.textContent = currency;
@@ -59,22 +67,26 @@
             currencyTwo.appendChild(option2);
           }
           //초기값 USD, KRW 설정
-          currencyOne.value='USD';
-          currencyTwo.value='KRW';
+          currencyOne.value = "USD";
+          currencyTwo.value = "KRW";
 
           //환률 계산 함수
-          function calculate(){
-            const amountOne = document.getElementById('amount-one').value;
-            const amountTwo = document.getElementById('amount-two');
-            const rate = rates[currencyTwo.value]/rates[currencyOne.value];
-            amountTwo.value = (amountOne*rate).toFixed(2);
-            rateEl.textContent = `1 ${currencyOne.value} = ${rate.toFixed(4)} ${currencyTwo.value}`;
+          function calculate() {
+            const amountOne = document.getElementById("amount-one").value; //직접 받음
+            const amountTwo = document.getElementById("amount-two"); //이후 계싼된 값
+            const rate = rates[currencyTwo.value] / rates[currencyOne.value];
+            amountTwo.value = (amountOne * rate).toFixed(2);
+            rateEl.textContent = `1 ${currencyOne.value} = ${rate.toFixed(4)} ${
+              currencyTwo.value
+            }`;
           }
           //이벤트 리스너
-          currencyOne.addEventListener('change',calculate);//바뀔 때마다 calculate함수 실행
-          currencyTwo.addEventListener('change', calculate);
-          document.getElementById('amount-one').addEventListener('input',calculate);
-          document.getElementById('swap').addEventListener('click', ()=>{
+          currencyOne.addEventListener("change", calculate); //바뀔 때마다 calculate함수 실행
+          currencyTwo.addEventListener("change", calculate);
+          document
+            .getElementById("amount-one")
+            .addEventListener("input", calculate);
+          document.getElementById("swap").addEventListener("click", () => {
             const temp = currencyOne.value;
             currencyOne.value = currencyTwo.value;
             currencyTwo.value = temp;
@@ -83,14 +95,13 @@
           //swap : '바꾸기' 버튼 누르면 통화 서로 바뀜
 
           calculate();
-
         } catch (error) {
-          console.error('Error fetching exchange rates:', error);
+          console.error("Error fetching exchange rates:", error);
         }
       }
 
       // 페이지 로드시 fetchExchangeRates 함수 실행
-      window.addEventListener('load', fetchExchangeRates);
+      window.addEventListener("load", fetchExchangeRates);
     </script>
   </body>
 </html>

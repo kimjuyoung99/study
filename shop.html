@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./shop.css" />
+    <script src="./shop.js" defer></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>쇼핑목록</h1>
+      </header>
+      <main>
+        <ul class="items" id="items">
+          <!-- <li class="item" data-num="0">
+            <span>epturi iure odit.</span>
+            <i
+              class="deletBtn fa-solid fa-trash-can"
+              data-id="0"
+              data-test="dkfkd"
+              data-test2="dkfjd"
+            ></i>
+          </li> -->
+        </ul>
+      </main>
+      <footer>
+        <input
+          type="text"
+          placeholder="구매 항목을 입력하세요"
+          id="itemInput"
+          class="itemInput"
+        />
+        <i class="addBtn fa-solid fa-plus" id="addBtn"></i>
+      </footer>
+    </div>
+  </body>
+</html>
+
+
+<!-- <body>: 본문 내용
+    <div class="wrap">: 전체 본문을 감싸는 컨테이너
+    <header>: 헤더 영역
+    <h1>: 페이지 제목 (쇼핑목록)
+    <main>: 메인 콘텐츠 영역
+    <ul class="items" id="items">: 쇼핑 목록을 담는 리스트
+    <li class="item" data-num="0">: (주석 처리됨) 쇼핑 아이템
+    <span>: 아이템 설명
+    <i class="deletBtn fa-solid fa-trash-can" data-id="0" data-test="dkfkd" data-test2="dkfjd"></i>: 삭제 버튼
+    <footer>: 푸터 영역
+    <input type="text" placeholder="구매 항목을 입력하세요" id="itemInput" class="itemInput">: 항목 입력 필드
+    <i class="addBtn fa-solid fa-plus" id="addBtn"></i>: 추가 버튼
+-->
+<!-- 
+CSS 클래스 정리
+.wrap: 본문 전체를 감싸는 컨테이너
+.items: 쇼핑 목록을 담는 리스트
+.item: 각 쇼핑 목록 항목 (li 요소)
+.deletBtn: 삭제 버튼 (휴지통 아이콘)
+.itemInput: 항목 입력 필드
+.addBtn: 항목 추가 버튼 (플러스 아이콘) 
+-->
