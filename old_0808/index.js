@@ -35,7 +35,7 @@ const createCard = (data, i) => {
       </div>
     </div>
   `;
-  cardEl.push(card);
+  cardEl.push
   card.addEventListener("click", () => card.classList.toggle("show-card"));
 };
 

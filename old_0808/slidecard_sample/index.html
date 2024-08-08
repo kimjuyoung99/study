@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="common.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="card-section">
+        <h1>암기를 재미있게! 플래쉬 카드</h1>
+        <ul id="cards-container" class="cards">
+          <!-- <li class="card">
+            <div class="inner-card">
+              <div class="inner-card-front">
+                <p>대충 질문 내용1</p>
+              </div>
+              <div class="inner-card-back">
+                <p>대충 기억할 내용</p>
+              </div>
+            </div>
+          </li>
+          <li class="card">
+            <div class="inner-card">
+              <div class="inner-card-front">
+                <p>대충 질문 내용2</p>
+              </div>
+              <div class="inner-card-back">
+                <p>대충 기억할 내용</p>
+              </div>
+            </div>
+          </li>
+          <li class="card">
+            <div class="inner-card">
+              <div class="inner-card-front">
+                <p>대충 질문 내용3</p>
+              </div>
+              <div class="inner-card-back">
+                <p>대충 기억할 내용</p>
+              </div>
+            </div>
+          </li>
+          <li class="card">
+            <div class="inner-card">
+              <div class="inner-card-front">
+                <p>대충 질문 내용4</p>
+              </div>
+              <div class="inner-card-back">
+                <p>대충 기억할 내용</p>
+              </div>
+            </div>
+          </li> -->
+        </ul>
+        <div class="navigation">
+          <button id="prev" class="nav-button">이전</button>
+          <p id="current"></p>
+          <button id="next" class="nav-button">다음</button>
+        </div>
+        <button id="show" class="btn btn-small">항목 추가</button>
+        <button id="clear" class="btn clear">모든 기록 삭제</button>
+      </section>
+
+      <section id="add-container" class="add-container">
+        <div>
+          <div class="top">
+            <h2>새로운 항목 추가</h2>
+            <button id="hide" class="btn">닫기</button>
+          </div>
+          <div class="form-group">
+            <label for="question">질문</label>
+            <textarea id="question" placeholder="질문을 적어주세요"></textarea>
+            <label for="answer">답변</label>
+            <textarea id="answer" placeholder="내용을 적어주세요"></textarea>
+          </div>
+          <button id="add-card" class="btn">추가하기</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

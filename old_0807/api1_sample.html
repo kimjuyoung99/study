@@ -117,15 +117,25 @@
       // 3. 스크롤이 끝까지 다다르면 새로운 5개를 호출
       // 4. 새로운 데이터가 로드되는 동안 로딩 ui
       // 5. 검색 기능 적용
+
+      // 한번에 불러올 포스트 개수 설정
       const LIMIT = 5;
-      const $postsCon = document.querySelector(".posts-con");
-      const $filter = document.getElementById("filter");
-      const $loader = document.createElement("div");
+
+      // 포스트가 담길 컨테이너, 검색 입력창, 로딩 UI 요소 선택
+      const $postsCon = document.querySelector(".posts-con");//CSS 선택자를 사용하여 문서에서 일치하는 첫 번째 요소를 반환
+      const $filter = document.getElementById("filter");//주어진 ID 속성 값을 가진 요소를 반환합니다. ID는 문서에서 고유해야 함
+      const $loader = document.createElement("div");//주어진 태그 이름을 가진 HTML 요소를 생성
+      //DOM 조작 메서드들. 
+      //
+
+      // 현재 페이지 번호와 로딩 상태, 검색어 저장
       let page = 1;
       let isLoading = false;
       let currentTerm = "";
 
+      // 포스트 데이터를 가져오는 함수
       const getPosts = async (searchTerm = "") => {
+        // API 엔드포인트 설정
         let url = `https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${page}`;
         if (searchTerm) url += `&q=${searchTerm}`;
         const res = await fetch(url);
@@ -133,6 +143,7 @@
         return data;
       };
 
+      // 포스트를 화면에 표시하는 함수
       const showPosts = async () => {
         const fragment = new DocumentFragment();
         const posts = await getPosts(currentTerm);
@@ -148,6 +159,8 @@
         });
         $postsCon.appendChild(fragment);
       };
+
+      // 새로운 포스트를 로딩하는 함수
       const newLoading = () => {
         if (isLoading) return;
         isLoading = true;
@@ -159,6 +172,8 @@
           $loader.classList.remove("show");
         }, 1000);
       };
+
+      // 검색어를 기반으로 포스트를 필터링하는 함수
       const filterPosts = () => {
         const searchTerm = $filter.value.trim();
         if (searchTerm !== currentTerm) {
@@ -169,11 +184,15 @@
         }
       };
 
+      // 초기 설정 함수
       const init = async function () {
         //postsCon(UL)의 Top + Height이 clientHeight보다 작으면 newLoading 호출
+        // 로딩 UI 설정
         $loader.classList.add("loader");
         $loader.innerHTML = `<span></span><span></span><span></span>`;
         document.body.appendChild($loader);
+
+        // 초기 포스트 로드
         let top = $postsCon.getBoundingClientRect().top;
         let height = $postsCon.getBoundingClientRect().height;
         while (top + height < document.documentElement.clientHeight) {
@@ -183,7 +202,11 @@
           height = $postsCon.getBoundingClientRect().height;
         }
       };
+
+      // 초기 설정 실행
       init();
+
+      // 스크롤 이벤트 리스너
       window.addEventListener("wheel", function (e) {
         const { deltaY } = e;
         const { scrollTop, scrollHeight, clientHeight } =
@@ -192,6 +215,8 @@
           newLoading();
         }
       });
+
+      // 검색 입력창 이벤트 리스너
       $filter.addEventListener("keyup", filterPosts);
     </script>
   </body>
