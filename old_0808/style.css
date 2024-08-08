@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  li {
+    list-style: none;
+  }
+  
+  main {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .card-section {
+    border: 1px solid red;
+    max-width: 500px;
+    width: 50%;
+    height: 40vw;
+    transform: translateY(-20%);
+    position: relative;
+    padding: 2rem;
+  }
+  h1,
+  .navigation,
+  .btn {
+    position: absolute;
+  }
+  h1 {
+    top: -80px;
+    width: 100%;
+    text-align: center;
+  }
+  .navigation {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -30px;
+  }
+  .btn-small {
+    top: -30px;
+    right: 0;
+  }
+  .clear {
+    right: 0;
+    bottom: -30px;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+  }
+  .card-section {
+  }
+  /* ul */
+  .cards {
+    position: relative;
+    height: 100%;
+    perspective: 900px;
+  }
+  
+  .card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    /* left: 0;
+    top: 0; */
+    transform: translateX(80%) rotateY(-40deg);
+    transition: transform 0.3s;
+    transform-style: preserve-3d;
+  }
+  /* 테슷 ul:hover li  */
+  .card.active {
+    transform: rotateY(0deg) translateX(0);
+    z-index: 100;
+    opacity: 1;
+  }
+  .card.left {
+    transform: translateX(-80%) rotateY(40deg);
+  }
+  /*  */
+  
+  /*  */
+  .inner-card {
+    position: relative;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+  }
+  .inner-card > div {
+    border-radius: 10px;
+  
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 1px dotted lightgray;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+  }
+  .inner-card-front {
+    background-color: lightgoldenrodyellow;
+  }
+  .inner-card-back {
+    transform: rotateY(180deg);
+    overflow-y: scroll;
+    background-color: aliceblue;
+  }
+  /* .card.show-card .inner-card  */
+  .card.show-card .inner-card {
+    transform: rotateY(180deg);
+  }
+  
+  .add-container.show {
+    /* display: flex; */
+    opacity: 1;
+    transform: scale(1);
+  }
+  .add-container {
+    display: flex;
+    position: fixed;
+    background-color: lightgray;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    opacity: 0.5;
+    transition: transform 0.5s;
+  }
+  
+  .form-group > * {
+    display: block;
+  }
+  
+  .form-group textarea {
+    width: 300px;
+    height: 150px;
+  }

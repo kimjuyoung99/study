@@ -39,6 +39,7 @@
     padding: 1rem;
     border: none;
     outline: none;
+    /* border:5px solid red; */
   }
   
   .items {
@@ -46,12 +47,15 @@
     overflow-y: scroll;
     background-color: rgb(254, 254, 234);
     padding: 20px 1rem;
+    /* border:5px solid red; */
+
   }
   .item {
     /* padding: 1rem; */
     display: flex;
     justify-content: space-between;
     border-bottom: 1px dotted #eaeaea;
+    /* border:5px solid red; */
   }
   
   .item span {
@@ -60,7 +64,7 @@
     padding: 1rem;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;   
   }
   .deletBtn {
     width: 50px;
@@ -68,6 +72,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    
   }
   .deletBtn:hover {
     color: tomato;
