@@ -1,0 +1,148 @@
+<!-- 공공 API를 활용한 무한 스크롤 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>무한 스크롤</title>
+    <style>
+      :root {
+        --p-color: #296ca8;
+        --p-light: #4992d3;
+        --shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: var(--p-color);
+        color: white;
+      }
+      li {
+        list-style: none;
+      }
+      .wrap {
+        max-width: 600px;
+        width: 80%;
+        margin: auto;
+      }
+      h1 {
+        text-align: center;
+        padding: 100px 0 1rem 0;
+      }
+      .filter-con input {
+        width: 100%;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+      .filter-con input:focus {
+        background-color: lightgoldenrodyellow;
+      }
+      .post {
+        border-radius: 10px;
+        background-color: var(--p-light);
+        margin-bottom: 2rem;
+        padding: 2rem;
+        position: relative;
+        box-shadow: var(--shadow);
+      }
+      .post-number {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 50%;
+        background-color: white;
+        border-radius: 50%;
+        top: -15px;
+        left: -15px;
+        color: var(--p-light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .loader {
+        display: none;
+        margin-bottom: 25px;
+        width: 100%;
+        height: 30px;
+        display: none;
+        justify-content: center;
+        gap: 10px;
+      }
+      .loader.show {
+        display: flex;
+      }
+      .loader span {
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        animation: bounce 0.4s ease-in infinite alternate;
+      }
+      .loader span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .loader span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>무한 스크롤</h1>
+      <div class="filter-con">
+        <input type="text" id="filter" placeholder="검색어를 입력하삼~" />
+      </div>
+      <ul class="posts-con"></ul>
+    </div>
+  
+    <script>
+        const LIMIT = 5;
+
+        const $postCon = document.querySelector(".posts-con");
+        const $fliter = document.getElementById("filter");
+        const $loader = document.createElement("div");
+
+        let page = 1;
+        let isLoading = false;
+        let currentTerm = "";
+
+        const getPosts = async (searchTerm = "") => {
+            let url = `https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${page}`;
+            if(searchTerm) url += `&q=${searchTerm}`;
+        
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        return data;
+        }
+
+        const showPosts = asyns () => {
+            const fragment = new DocumentFragment();
+            const posts = await getPosts(currentTerm);
+            posts?.forEach((post) => {
+                
+            });
+        };
+
+
+
+
+    </script>
+  </body>
+</html>

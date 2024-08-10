@@ -1,3 +1,4 @@
+<!-- 공공 API를 활용한 무한 스크롤 -->
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -122,41 +123,64 @@
       const LIMIT = 5;
 
       // 포스트가 담길 컨테이너, 검색 입력창, 로딩 UI 요소 선택
-      const $postsCon = document.querySelector(".posts-con");//CSS 선택자를 사용하여 문서에서 일치하는 첫 번째 요소를 반환
-      const $filter = document.getElementById("filter");//주어진 ID 속성 값을 가진 요소를 반환합니다. ID는 문서에서 고유해야 함
-      const $loader = document.createElement("div");//주어진 태그 이름을 가진 HTML 요소를 생성
-      //DOM 조작 메서드들. 
+      const $postsCon = document.querySelector(".posts-con"); //CSS 선택자를 사용하여 문서에서 일치하는 첫 번째 요소를 반환
+      const $filter = document.getElementById("filter"); //주어진 ID 속성 값을 가진 요소를 반환합니다. ID는 문서에서 고유해야 함
+      const $loader = document.createElement("div"); //주어진 태그 이름을 가진 HTML 요소를 생성
+      //DOM 조작 메서드들.
       //
 
       // 현재 페이지 번호와 로딩 상태, 검색어 저장
       let page = 1;
       let isLoading = false;
-      let currentTerm = "";
+      let currentTerm = ""; //현재 치고 있는 검색 문자열
 
       // 포스트 데이터를 가져오는 함수
       const getPosts = async (searchTerm = "") => {
         // API 엔드포인트 설정
         let url = `https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${page}`;
-        if (searchTerm) url += `&q=${searchTerm}`;
+        if (searchTerm) url += `&q=${searchTerm}`; //검색에 이용되는 함수
+        //searchTerm에 값이 존재할 때
+        //기존 URL에 추가로 쿼리 파라미터 &q=${searchTerm}를 덧붙입
+        //${searchTerm}는 템플릿 리터럴을 사용하여 searchTerm 변수의 값을 문자열에 삽입합니다.
+        //예를 들어, searchTerm이 "hello"라면, url은 &q=hello가 추가됨.
+        //즉 검색한 애들만 추가되게끔
         const res = await fetch(url);
+        // fetch(url) : 주어진 URL에 HTTP 요청을 보냄
+        //이 함수는 Response 객체를 반환하는 프로미스를 반환
         const data = await res.json();
+        //await 키워드는 fetch가 완료될 때까지 기다림
+        //res에는 Response 객체가 할당
+        //res.json() 메서드 : 응답 본문을 JSON 형식으로 파싱하여 자바스크립트 객체로 변환
+
         return data;
       };
 
       // 포스트를 화면에 표시하는 함수
+      // 포스트를 화면에 표시하는 함수
       const showPosts = async () => {
+        // DocumentFragment를 생성하여 여러 요소를 한 번에 추가할 수 있도록 준비
         const fragment = new DocumentFragment();
+        // 현재 검색어를 기준으로 포스트 데이터를 비동기적으로 가져옴
         const posts = await getPosts(currentTerm);
+        // 가져온 포스트 데이터가 존재하면, 각 포스트를 순회하며 DOM 요소를 생성
         posts?.forEach((post) => {
+          // 새로운 li 요소를 생성
           const $postElm = document.createElement("li");
+          // 생성한 li 요소에 "post" 클래스를 추가
           $postElm.classList.add("post");
-          $postElm.innerHTML = `<span class="post-number">${post.id}</span>
-          <div class="post-info">
-            <h2 class="post-title">${post.title}</h2>
-            <p class="post-body">${post.body}</p>
-          </div>`;
+
+          // li 요소의 내부 HTML을 설정하여 포스트 번호, 제목, 본문을 포함
+          $postElm.innerHTML = `
+      <span class="post-number">${post.id}</span>
+      <div class="post-info">
+        <h2 class="post-title">${post.title}</h2>
+        <p class="post-body">${post.body}</p>
+      </div>
+    `;
+        // 생성한 li 요소를 DocumentFragment에 추가
           fragment.appendChild($postElm);
         });
+        // 모든 포스트 요소를 포함한 DocumentFragment를 포스트 컨테이너에 추가
         $postsCon.appendChild(fragment);
       };
 
@@ -218,6 +242,8 @@
 
       // 검색 입력창 이벤트 리스너
       $filter.addEventListener("keyup", filterPosts);
+      //사용자가 검색어를 입력할 때마다 filterPosts() 함수를 호출하여
+      //검색어에 맞는 포스트를 필터링하고 화면에 표시
     </script>
   </body>
 </html>

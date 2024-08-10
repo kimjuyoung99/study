@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  li {
+    list-style: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  body {
+    background-color: #fcfef0;
+  }
+  
+  main {
+    max-width: 1200px;
+    width: calc(100% - 2rem);
+    margin: auto;
+  }
+  main > * {
+    border: 1px solid red;
+    margin-bottom: 1em;
+  }
+  h1 {
+    text-align: center;
+    padding-top: 1em;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+  }
+  button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+  nav button {
+    padding: 0.75em;
+  }
+  nav button.on,
+  nav button:hover {
+    background-color: aliceblue;
+  }
+  
+  .inputArea {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    padding: 0 1em;
+  }
+  .inputArea input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 1em;
+  }
+  
+  /*ul*/
+  .listCon {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75em;
+    font-size: 0.7em;
+  }
+  .listCon > li {
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    position: relative;
+  }
+  .listCon > li > * {
+    width: 100%;
+  }
+  .listCon > li .source,
+  .listCon > li .date {
+    border: 1px solid lightblue;
+    width: auto;
+  }
+  .listCon .newsImg {
+    position: relative;
+    padding-top: 70%;
+    border: 1px solid lightgray;
+    border-radius: 1em;
+    overflow: hidden;
+    margin-bottom: 0.5em;
+  }
+  .listCon img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+  }
+  
+  .listCon .title {
+    font-size: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+  }
+  
+  .listCon .more {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: transparent;
+  }
+  
+  .pgCon {
+    display: flex;
+    justify-content: center;
+    gap: 0.25em;
+  }
+  .pgCon button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #eaeaea;
+  }
+  
+  .pgCon button.on {
+    background-color: tomato;
+  }
