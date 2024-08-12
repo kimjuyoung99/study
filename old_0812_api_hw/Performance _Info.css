@@ -1,8 +1,58 @@
+header {
+    height: 180px; /* 헤더 높이 설정 */
+    background-color: black; /* 헤더 배경색 설정 (필요시) */
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10; /* mainSec 위로 위치 */
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
 ul {
     display: flex;
-    gap:15%;
+    gap: 15%;
+    color: white;
 }
-.logo img{
+.logo img {
     width: 220px;
     height: 100px;
 }
+.header1 {
+    display: flex;
+    gap: 5%;
+}
+
+.inputArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5%;
+}
+
+.mainSec {
+    border: 2px solid red;
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: block;
+    position: relative; /* header와 겹치지 않도록 설정 */
+    z-index: 1; /* header보다 아래로 위치 */
+}
+
+.eventBox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 box */
+    gap: 16px; /* 박스 간의 간격 */
+}
+
+.box {
+    border: 1px solid #ddd;
+    padding: 16px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+

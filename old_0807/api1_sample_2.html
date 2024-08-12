@@ -136,7 +136,7 @@
             const fragment = new DocumentFragment();
             const posts = await getPosts(currentTerm);
             posts?.forEach((post) => {
-                
+                const $postElm = document.createElement(currentTerm);
             });
         };
 
