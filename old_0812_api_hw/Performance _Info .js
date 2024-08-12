@@ -1,4 +1,6 @@
 const url = "http://api.prgrms-fe.xyz/events";
+// const url = "http://api.prgrms-fe.xyz/events/66b79f555ea334885261bb09";
+
 
 fetch(url, {
     method: 'GET', // GET 요청
