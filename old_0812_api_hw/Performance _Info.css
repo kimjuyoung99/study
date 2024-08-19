@@ -149,3 +149,10 @@ ul > li {
     border-radius: 3px;
     cursor: pointer;
 }
+.topRated, .upComing, .nowPlaying {
+    cursor: pointer;
+}
+
+.topRated:hover, .upComing:hover, .nowPlaying:hover {
+    text-decoration: underline;
+}

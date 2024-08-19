@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const apiKey = "f21ecfa7ce04ed1c5ddf3919ba7a8278";
-    const baseUrl = "https://api.themoviedb.org/3/discover/movie";
-    const detailUrl = "https://api.themoviedb.org/3/movie";
+    const baseUrl = "https://api.themoviedb.org/3";
     const eventBox = document.querySelector('.eventBox');
     let page = 1;
     let isLoading = false;
+    let currentCategory = 'top_rated';
 
     function truncateText(text, maxLength) {
         if (text.length > maxLength) {
@@ -17,7 +17,20 @@ document.addEventListener("DOMContentLoaded", function () {
         if (isLoading) return;
         isLoading = true;
     
-        const url = `${baseUrl}?api_key=${apiKey}&language=ko-KR&page=${page}&sort_by=popularity.desc`;
+        let url;
+        switch(currentCategory) {
+            case 'top_rated':
+                url = `${baseUrl}/movie/top_rated?api_key=${apiKey}&language=ko-KR&page=${page}`;
+                break;
+            case 'upcoming':
+                url = `${baseUrl}/movie/upcoming?api_key=${apiKey}&language=ko-KR&page=${page}`;
+                break;
+            case 'now_playing':
+                url = `${baseUrl}/movie/now_playing?api_key=${apiKey}&language=ko-KR&page=${page}`;
+                break;
+            default:
+                url = `${baseUrl}/movie/top_rated?api_key=${apiKey}&language=ko-KR&page=${page}`;
+        }
     
         fetch(url)
             .then(response => response.json())
@@ -25,29 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("Fetched Data:", data);
     
                 data.results.forEach(movie => {
-                    const box = document.createElement('div');
-                    box.className = 'box';
-                    box.dataset.movieId = movie.id; // 영화 ID를 데이터 속성으로 추가
-                    box.className = 'box';
-    
-                    const poster = document.createElement('img');
-                    poster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-                    poster.alt = movie.title;
-    
-                    const truncatedOverview = truncateText(movie.overview, 200);
-    
-                    const info = document.createElement('div');
-                    info.className = 'info';
-                    info.innerHTML = `
-                        <h3>${movie.title}</h3>
-                        <p>${truncatedOverview}</p>
-                        <p>평점: ${movie.vote_average} (${movie.vote_count}명 참여)</p>
-                        <p>개봉일: ${movie.release_date}</p>
-                    `;
-    
-                    box.appendChild(poster);
-                    box.appendChild(info);
-                    eventBox.appendChild(box);
+                    renderMovieBox(movie);
                 });
                 page++;
                 isLoading = false;
@@ -58,13 +49,46 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
+    function renderMovieBox(movie) {
+        const box = document.createElement('div');
+        box.className = 'box';
+        box.dataset.movieId = movie.id;
+
+        const poster = document.createElement('img');
+        poster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+        poster.alt = movie.title;
+
+        const truncatedOverview = truncateText(movie.overview, 200);
+
+        const info = document.createElement('div');
+        info.className = 'info';
+        info.innerHTML = `
+            <h3>${movie.title}</h3>
+            <p>${truncatedOverview}</p>
+            <p>평점: ${movie.vote_average} (${movie.vote_count}명 참여)</p>
+            <p>개봉일: ${movie.release_date}</p>
+        `;
+
+        box.appendChild(poster);
+        box.appendChild(info);
+        eventBox.appendChild(box);
+    }
+
     function handleScroll() {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
             fetchMovies();
         }
     }
+
+    function changeCategory(category) {
+        currentCategory = category;
+        page = 1;
+        eventBox.innerHTML = '';
+        fetchMovies();
+    }
+
     function fetchMovieDetails(movieId) {
-        const url = `${detailUrl}/${movieId}?api_key=${apiKey}&language=ko-KR`;
+        const url = `${baseUrl}/movie/${movieId}?api_key=${apiKey}&language=ko-KR`;
         
         fetch(url)
             .then(response => response.json())
@@ -80,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showMovieModal(movieData) {
         const modalContainer = document.getElementById('modalContainer');
         modalContainer.innerHTML = ''; // 기존 모달 제거
-    
+
         const modal = document.createElement('div');
         modal.className = 'modal';
         
@@ -108,6 +132,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // 카테고리 변경 이벤트 리스너 추가
+    document.querySelector('.topRated').addEventListener('click', () => changeCategory('top_rated'));
+    document.querySelector('.upComing').addEventListener('click', () => changeCategory('upcoming'));
+    document.querySelector('.nowPlaying').addEventListener('click', () => changeCategory('now_playing'));
+
+    // 영화 상세 정보 모달 이벤트 리스너
     eventBox.addEventListener('click', function(e) {
         const box = e.target.closest('.box');
         if (box) {
@@ -117,9 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-
-    window.addEventListener('scroll', handleScroll);
-
 
     window.addEventListener('scroll', handleScroll);
 
