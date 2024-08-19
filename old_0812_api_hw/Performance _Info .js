@@ -37,8 +37,27 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 console.log("Fetched Data:", data);
     
+                const currentDate = new Date();
+    
                 data.results.forEach(movie => {
-                    renderMovieBox(movie);
+                    const releaseDate = new Date(movie.release_date);
+                    let shouldRender = false;
+    
+                    switch(currentCategory) {
+                        case 'top_rated':
+                            shouldRender = true;
+                            break;
+                        case 'upcoming':
+                            shouldRender = releaseDate > currentDate;
+                            break;
+                        case 'now_playing':
+                            shouldRender = releaseDate <= currentDate;
+                            break;
+                    }
+    
+                    if (shouldRender) {
+                        renderMovieBox(movie);
+                    }
                 });
                 page++;
                 isLoading = false;
@@ -48,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 isLoading = false;
             });
     }
-
     function renderMovieBox(movie) {
         const box = document.createElement('div');
         box.className = 'box';
