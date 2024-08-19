@@ -1,27 +1,44 @@
 header {
-    height: 180px; /* 헤더 높이 설정 */
-    background-color: black; /* 헤더 배경색 설정 (필요시) */
+    height: 180px;
+    /* 헤더 높이 설정 */
+    background-color: black;
+    /* 헤더 배경색 설정 (필요시) */
     display: block;
     align-items: center;
     justify-content: space-between;
     position: relative;
-    z-index: 10; /* mainSec 위로 위치 */
+    z-index: 10;
+    /* mainSec 위로 위치 */
 }
-html, body {
+
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
     background-color: black;
 }
+
 ul {
     display: flex;
     gap: 15%;
     color: white;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    list-style-type: none;
 }
+ul > li {
+    margin-top:40px;
+}
+
 .logo img {
-    width: 220px;
-    height: 100px;
+    width: 270px;
+    height: 140px;
 }
+
 .header1 {
     display: flex;
     gap: 5%;
@@ -35,24 +52,100 @@ ul {
 }
 
 .mainSec {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 100%;
     height: calc(100vh - 100px);
     display: block;
-    position: relative; /* header와 겹치지 않도록 설정 */
-    z-index: 1; /* header보다 아래로 위치 */
+    position: relative;
+    /* header와 겹치지 않도록 설정 */
+    z-index: 1;
+    /* header보다 아래로 위치 */
 }
-
+/* 기존 스타일은 유지하고 필요한 추가 스타일링 */
 .eventBox {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 box */
-    gap: 16px; /* 박스 간의 간격 */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
 }
 
 .box {
-    border: 1px solid #ddd;
-    padding: 16px;
-    text-align: center;
-    background-color: #f9f9f9;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
 }
 
+.box:hover {
+    transform: scale(1.05);
+}
+
+.box img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+}
+
+.box:hover .info {
+    opacity: 1;
+}
+
+.info h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.info p {
+    font-size: 14px;
+    margin: 8px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 90%;
+}
+
+.close-modal {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
