@@ -10,10 +10,12 @@
   <body>
     <header>
       <ul>
-        <div class="logo"><img src="./img/movielogo_white.png" /></div>
-        <li class="topRated">top rated</li>
-        <li class="upComing">upcoming</li>
-        <li class="nowPlaying">now playing</li>
+        <div class="logo">
+          <img src="./img/movielogo_white.png" alt="로고" />
+        </div>
+        <li class="menu-item topRated">top rated</li>
+        <li class="menu-item upComing">upcoming</li>
+        <li class="menu-item nowPlaying">now playing</li>
       </ul>
       <div class="header1">
         <select class="genres" id="genres">
@@ -38,20 +40,16 @@
           <option value="chorus">합창</option>
         </select>
         <div class="inputArea">
-            <input type="text" placeholder="검색어를 입력하세요" />
-            <button class="searchBtn">검색</button>
+          <input type="text" placeholder="검색어를 입력하세요" />
+          <button class="searchBtn">검색</button>
         </div>
       </div>
     </header>
 
     <main class="mainSec">
-        <div class="eventBox">
-
-        </div>
+      <div class="eventBox"></div>
     </main>
     <div id="modalContainer"></div>
-
-
   </body>
 
   <script></script>

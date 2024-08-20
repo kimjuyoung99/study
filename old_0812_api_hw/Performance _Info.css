@@ -18,18 +18,75 @@ body {
     padding: 0;
     background-color: black;
 }
-
 ul {
     display: flex;
     gap: 15%;
     color: white;
-    font-family: Inter;
+    font-family: Inter, sans-serif;
     font-size: 30px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
     list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu-item {
+    position: relative;
+    margin-top: 40px;
+    cursor: pointer;
+    padding-top: 20px; /* 원을 위한 공간 */
+    transition: color 0.3s ease; /* 색상 변화에 애니메이션 추가 */
+  }
+  
+  .dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .menu-item:hover .dot,
+  .menu-item.active .dot {
+    opacity: 1;
+  }
+  
+  .topRated, .upComing, .nowPlaying {
+    cursor: pointer;
 }
+
+.topRated:hover, .upComing:hover, .nowPlaying:hover {
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+.menu-item:hover,
+.menu-item.active {
+    color: red; /* 호버 및 활성 상태일 때 색상 변경 */
+    text-decoration: none; /* 밑줄 제거 확실히 하기 */
+}
+  
+  /* 각 메뉴 항목별 도트 색상 지정 */
+  .topRated .dot {
+    background-color: #ff6b6b;
+  }
+  
+  .upComing .dot {
+    background-color: #4ecdc4;
+  }
+  
+  .nowPlaying .dot {
+    background-color: #feca57;
+  }
+  .menu-item:hover,
+  .menu-item.active {
+    color: red;
+  }
 ul > li {
     margin-top:40px;
 }
@@ -133,26 +190,62 @@ ul > li {
 }
 
 .modal-content {
-    background-color: white;
+    position: relative;
     padding: 20px;
     border-radius: 5px;
-    max-width: 500px;
+    max-width: 800px;
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* 검은색 오버레이, 투명도 조절 가능 */
+    z-index: 0;
+}
+
+.modal-inner-content {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.1); /* 내부 콘텐츠 배경 투명도 */
+    padding: 20px;
+    border-radius: 5px;
 }
 
 .close-modal {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    background: none;
     border: none;
-    border-radius: 3px;
     cursor: pointer;
+    z-index: 2;
 }
-.topRated, .upComing, .nowPlaying {
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #ddd;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.topRated:hover, .upComing:hover, .nowPlaying:hover {
-    text-decoration: underline;
+.modal-content iframe {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-top: 20px;
 }
