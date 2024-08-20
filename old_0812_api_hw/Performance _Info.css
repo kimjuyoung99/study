@@ -148,15 +148,27 @@ ul > li {
     gap: 16px;
     padding: 16px;
 }
-
 .box {
     position: relative;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
+.movie-title {
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .box:hover {
     transform: scale(1.05);
 }

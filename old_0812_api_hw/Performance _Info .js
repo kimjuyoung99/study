@@ -125,21 +125,26 @@ document.addEventListener("DOMContentLoaded", function () {
     poster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     poster.alt = movie.title;
 
+    const title = document.createElement("div");
+    title.className = "movie-title";
+    title.textContent = movie.title;
+
     const truncatedOverview = truncateText(movie.overview, 200);
 
     const info = document.createElement("div");
     info.className = "info";
     info.innerHTML = `
-            <h3>${movie.title}</h3>
-            <p>${truncatedOverview}</p>
-            <p>평점: ${movie.vote_average} (${movie.vote_count}명 참여)</p>
-            <p>개봉일: ${movie.release_date}</p>
-        `;
+        <h3>${movie.title}</h3>
+        <p>${truncatedOverview}</p>
+        <p>평점: ${movie.vote_average} (${movie.vote_count}명 참여)</p>
+        <p>개봉일: ${movie.release_date}</p>
+    `;
 
     box.appendChild(poster);
+    box.appendChild(title);
     box.appendChild(info);
     eventBox.appendChild(box);
-  }
+}
 
   function handleScroll() {
     if (
