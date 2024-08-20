@@ -7,8 +7,8 @@ header {
     position: relative;
     z-index: 10;
     margin-bottom: 20px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 html,
@@ -47,7 +47,7 @@ ul {
     transform: translateX(-50%);
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: #E6002D;
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -68,7 +68,7 @@ ul {
 
 .menu-item:hover,
 .menu-item.active {
-    color: red;
+    color: #E6002D;
     text-decoration: none;
 }
 
@@ -83,14 +83,22 @@ ul {
 .nowPlaying .dot {
     background-color: #feca57;
 }
-
-ul > li {
-    margin-top: 40px;
+.nav{
+    height: 50px;
+}
+.nav > li {
+    height: 40px;
+    /* border: 2px solid red; */
+    margin-top: 5px;
 }
 
+.logo{
+    height: 90px;
+}
 .logo img {
-    width: 250px;
-    height: 120px;
+    width: 180px;
+    height: 90px;
+    padding-left: 30px;
 }
 
 .header1 {

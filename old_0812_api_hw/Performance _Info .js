@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let page = 1;
   let isLoading = false;
   let currentCategory = "top_rated";
+  
 
 //검색 기능
   const searchInput = document.querySelector('.inputArea input');
@@ -129,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     title.className = "movie-title";
     title.textContent = movie.title;
 
-    const truncatedOverview = truncateText(movie.overview, 200);
+    const truncatedOverview = truncateText(movie.overview, 300);
 
     const info = document.createElement("div");
     info.className = "info";
@@ -239,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     innerContent.innerHTML = `
         <h2>${movieData.title}</h2>
+        <p><strong>개요:</strong> ${movieData.overview || '정보 없음'}</p>
         <p><strong>장르:</strong> ${genres}</p>
         <p><strong>국가:</strong> ${countries || '정보 없음'}</p>
         <p><strong>상영시간:</strong> ${movieData.runtime}분</p>
@@ -280,8 +282,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", handleScroll);
 
+
   // 초기 로딩
+  changeCategory('now_playing');
+
   fetchMovies();
-  changeCategory('top_rated');
 
 });
