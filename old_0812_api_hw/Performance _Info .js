@@ -6,6 +6,43 @@ document.addEventListener("DOMContentLoaded", function () {
   let isLoading = false;
   let currentCategory = "top_rated";
 
+//검색 기능
+  const searchInput = document.querySelector('.inputArea input');
+  const searchButton = document.querySelector('.searchBtn');
+
+  searchButton.addEventListener('click', performSearch);
+
+  function performSearch() {
+    const query = searchInput.value.trim();
+    if (query) {
+      const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&language=ko-KR&query=${encodeURIComponent(query)}&include_adult=false&page=1`;
+      
+      eventBox.innerHTML = ''; // 기존 영화 목록 제거
+      page = 1; // 페이지 초기화
+      
+      fetch(searchUrl)
+        .then(response => response.json())
+        .then(data => {
+          console.log("Search Results:", data);
+          data.results.forEach(movie => {
+            renderMovieBox(movie);
+          });
+        })
+        .catch(error => {
+          console.error("Error searching movies:", error);
+        });
+    }
+  }
+
+   // Enter 키 눌러도 검색 가능
+   searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      performSearch();
+    }
+  });
+
+
+
   // 카테고리 변경 이벤트 리스너
   // 카테고리 변경 이벤트 리스너 추가
   document
@@ -240,4 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 초기 로딩
   fetchMovies();
+  changeCategory('top_rated');
+
 });

@@ -2,7 +2,7 @@ header {
     height: 180px;
     /* 헤더 높이 설정 */
     background-color: black;
-    /* 헤더 배경색 설정 (필요시) */
+    /* 헤더 배경색 설정 (필요하면!!) */
     display: block;
     align-items: center;
     justify-content: space-between;
