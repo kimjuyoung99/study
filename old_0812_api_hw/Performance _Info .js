@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-   // Enter 키 눌러도 검색 가능
+    // Enter 키 눌러도 검색 가능
    searchInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       performSearch();
@@ -44,8 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  // 카테고리 변경 이벤트 리스너
-  // 카테고리 변경 이벤트 리스너 추가
   document
     .querySelector(".topRated")
     .addEventListener("click", () => changeCategory("top_rated"));
@@ -56,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector(".nowPlaying")
     .addEventListener("click", () => changeCategory("now_playing"));
 
+    //미리보기 특정 글자 갯수 넘으면 ... 처리
   function truncateText(text, maxLength) {
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + "...";
@@ -63,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return text;
   }
 
+  //영화 목록 각각 불러오기
   function fetchMovies() {
     if (isLoading) return;
     isLoading = true;
@@ -117,6 +117,8 @@ document.addEventListener("DOMContentLoaded", function () {
         isLoading = false;
       });
   }
+
+  //영화 박스 랜더링 하기
   function renderMovieBox(movie) {
     const box = document.createElement("div");
     box.className = "box";
@@ -130,23 +132,31 @@ document.addEventListener("DOMContentLoaded", function () {
     title.className = "movie-title";
     title.textContent = movie.title;
 
-    const truncatedOverview = truncateText(movie.overview, 300);
+    const rating = document.createElement("div");
+    rating.className = "movie-rating";
+    rating.textContent = `⭐ ${movie.vote_average}`;
+
+    const releaseDate = document.createElement("div");
+    releaseDate.className = "movie-release-date";
+    releaseDate.textContent = `개봉일: ${movie.release_date}`;
 
     const info = document.createElement("div");
     info.className = "info";
     info.innerHTML = `
         <h3>${movie.title}</h3>
-        <p>${truncatedOverview}</p>
-        <p>평점: ${movie.vote_average} (${movie.vote_count}명 참여)</p>
+        <p>${truncateText(movie.overview, 300)}</p>
+        <p>⭐️ ${movie.vote_average} (${movie.vote_count}명 참여)</p>
         <p>개봉일: ${movie.release_date}</p>
     `;
 
     box.appendChild(poster);
     box.appendChild(title);
+    box.appendChild(rating);
+    box.appendChild(releaseDate);
     box.appendChild(info);
     eventBox.appendChild(box);
 }
-
+    //스크롤
   function handleScroll() {
     if (
       window.innerHeight + window.scrollY >=
@@ -155,6 +165,8 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchMovies();
     }
   }
+
+  //카테고리별로 나누기
   function changeCategory(category) {
     currentCategory = category;
     page = 1;
@@ -183,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchMovies();
   }
 
+  //영화 상세 페이지(모달)로 넘어가기
   function fetchMovieDetails(movieId) {
     const movieUrl = `${baseUrl}/movie/${movieId}?api_key=${apiKey}&language=ko-KR`;
     const videoUrl = `${baseUrl}/movie/${movieId}/videos?api_key=${apiKey}&language=ko-KR`;
@@ -201,6 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  //모달 생성하기
   function showMovieModal(movieData, videoData) {
     const modalContainer = document.getElementById('modalContainer');
     modalContainer.innerHTML = ''; // 기존 모달 제거
@@ -283,9 +297,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", handleScroll);
 
 
-  // 초기 로딩
+  // 초기 로딩 (현재 상영중인 영화로 변경)
   changeCategory('now_playing');
-
   fetchMovies();
 
 });

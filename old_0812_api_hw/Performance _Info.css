@@ -71,18 +71,6 @@ ul {
     color: #E6002D;
     text-decoration: none;
 }
-
-.topRated .dot {
-    background-color: #ff6b6b;
-}
-
-.upComing .dot {
-    background-color: #4ecdc4;
-}
-
-.nowPlaying .dot {
-    background-color: #feca57;
-}
 .nav{
     height: 50px;
 }
@@ -96,17 +84,18 @@ ul {
     height: 90px;
 }
 .logo img {
-    width: 180px;
-    height: 90px;
+    width: 220px;
+    height: 110px;
     padding-left: 30px;
+    margin-top:-20px;
 }
 
 .header1 {
     display: flex;
-    justify-content: center; /* 변경: flex-end에서 center로 */
-    align-items: center; /* 추가: 세로 중앙 정렬을 위해 */
+    justify-content: center; /* 변경: flex-end -> center */
+    align-items: center; /* 세로 중앙 정렬 위해 */
     padding: 10px;
-    width: 100%; /* 추가: 전체 너비를 사용하도록 */
+    width: 100%; /* 전체 너비 사용하도록 */
 }
 
 .inputArea {
@@ -165,28 +154,55 @@ ul {
     display: flex;
     flex-direction: column;
 }
-
 .movie-title {
     color: white;
     text-align: center;
-    padding: 10px;
-    font-size: 17px;
+    padding: 8px 10px 4px;  /* 상단 패딩 줄임, 하단 패딩 더 줄임 */
+    font-size: 16px;  /* 글자 크기 약간 줄임 */
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.7);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-top: 2px;
+    margin-bottom: 1px;  
 }
+
+.movie-rating {
+    color: white;
+    text-align: center;
+    padding: 2px;  /* 패딩 줄임 */
+    font-size: 14px;
+    margin-bottom: 1px; 
+}
+
+.movie-release-date {
+    color: white;
+    text-align: center;
+    padding: 1px;  
+    font-size: 13px;  
+}
+
+.box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding-bottom: 8px;  /* 박스 하단에 약간의 패딩 추가 */
+}
+
 .box:hover {
     transform: scale(1.05);
 }
 
+/* 포스터 이미지와 텍스트 정보 사이의 간격 조정 */
 .box img {
-    width: 100%;
-    height: auto;
-    display: block;
+    margin-bottom: 4px;
 }
-
 .info {
     position: absolute;
     top: 0;
