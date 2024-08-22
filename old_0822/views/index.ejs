@@ -1,0 +1,57 @@
+<%- include('header.ejs') %>
+
+<main>
+	<h2>작성하기</h2>
+	<form action="/add" method="post">
+		<label for="title">할일입력</label>
+		<input type="text" name="title" id="title" placeholder="할일입력" />
+		<label for="dateOfGoals">목표날자</label>
+		<input type="date" name="dateOfGoals" id="dateOfGoals" />
+
+		<label hidden>작성일</label>
+		<input hidden type="date" name="dateOfCreate" id="dateOfCreate" />
+
+		<label for="todoDetail">상세내역</label>
+		<textarea name="todoDetail" id="todoDetail"></textarea>
+
+		<input
+			type="submit"
+			class="btnSubmit"
+			id="btnSubmit"
+			value="등록하기"
+		/>
+	</form>
+	<p class="alertMessage" id="alertMessage">알림메시지</p>
+</main>
+
+<script>
+	const titleInput = document.getElementById("title");
+	const dateOfGoalsInput = document.getElementById("dateOfGoals");
+	const dateOfCreateInput = document.getElementById("dateOfCreate");
+	const todoDetail = document.getElementById("todoDetail");
+	const alertArea = document.getElementById("alertMessage");
+	const btnSubmit = document.getElementById("btnSubmit");
+
+	btnSubmit.addEventListener("click", (e) => {
+		e.preventDefault();
+
+		let title = titleInput.value;
+		let dateOfGoals = dateOfGoalsInput.value;
+
+		let today = new Date().toISOString().slice(0, 10);
+		dateOfCreateInput.value = today;
+
+		if (!title || !dateOfGoals) {
+			alertArea.innerText = "할일과 목표날짜는 필수 입력사항입니다.";
+			return;
+		}
+
+		if (new Date(dateOfGoals) < new Date(today)) {
+			alertArea.innerText = "목표날짜는 오늘 이후로 입력해주세요.";
+			return;
+		}
+		document.querySelector("form").submit();
+	});
+</script>
+
+<%- include('footer.ejs') %>

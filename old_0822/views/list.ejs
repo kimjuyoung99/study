@@ -1,0 +1,23 @@
+<%- include('header.ejs') %>
+
+<main>
+	<h2>목록보기<%=posts.length %></h2>
+	<ul>
+		<%- posts.length === 0 ? `
+		<li>리스트가 없어요</li>
+		` : posts.map(post => `
+		<li data-postNum="1" class="list">
+			<p class="title">할일 : ${post.title}</p>
+			<div>
+				<p>
+					작성일 : ${post.dateOfCreate} / 목표일 : ${post.dateOfGoals}
+				</p>
+				<button class="detailBtn">세부사항보기</button>
+				<button class="deleteBtn">삭제</button>
+			</div>
+		</li>
+		`).join("") %>
+	</ul>
+</main>
+
+<%- include('footer.ejs') %>
