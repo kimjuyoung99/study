@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>작삼 샘플</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="myreset.css"/>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+      }
+      a {
+        text-decoration: none;
+      }
+      li {
+        list-style: none;
+      }
+      header {
+        background-color: #777777;
+        color: rgb(201, 201, 201);
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+      }
+      h1 strong {
+        color: #8bcffc;
+      }
+      main {
+        max-width: 600px;
+        margin: auto;
+      }
+      header > div {
+        max-width: 600px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h1 {
+        font-size: 2em;
+        padding: 1rem 0;
+      }
+      h2 {
+        font-size: 1.5em;
+        padding: 1rem 0;
+        color: #7f8c8d;
+      }
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+      nav a {
+        background-color: aliceblue;
+        padding: 0.5rem 2rem;
+        border-radius: 10px;
+        color: #333;
+      }
+      form {
+        background-color: #fff;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #2c3e50;
+        font-weight: bold;
+      }
+      input[type="text"],
+      input[type="date"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      input[type="date"] {
+        color: #2c3e50;
+      }
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
+      input[type="submit"] {
+        background-color: #3498db;
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+      }
+      input[type="submit"]:hover {
+        background-color: #2980b9;
+      }
+      .alertMessage {
+        text-align: center;
+        color: #e74c3c;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+      input:focus,
+      textarea:focus {
+        outline: 2px solid #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+      }
+      ::placeholder {
+        color: #bdc3c7;
+      }
+      label[hidden] {
+        display: none;
+      }
+      footer {
+        background-color: #cfcfcf;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+        font-size: 0.75rem;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>작삼 샘플</h1>
+      <nav>
+        <a href="/">작성하기</a>
+        <a href="/list">목록보기</a>
+      </nav>
+    </header>
+
+    <main>
+      <h2>작성하기</h2>
+      <form>
+        <label for="title">할일입력</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="할일입력"
+          required
+        />
+        <label for="dateOfGoals">목표날짜</label>
+        <input type="date" name="dateOfGoals" id="dateOfGoals"/>
+
+        <label hidden>작성일</label>
+        <input type="date" name="dateOfCreation" id="dateOfCreation"/>
+
+        <label for="todoDetail">상세내역</label>
+        <textarea name="todoDetail" id="todoDetail"></textarea>
+
+        <input type="submit" value="등록하기" id="btnSubmit" />
+      </form>
+      
+      <p class="alertMessage" id="alertMessage">알림메세지</p>
+    </main>
+
+    <footer>하단</footer>
+  </body>
+</html>
